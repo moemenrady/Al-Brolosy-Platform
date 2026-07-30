@@ -1,0 +1,9 @@
+@import "./design-system/_colors.css";
+@import "./design-system/_typography.css";
+@import "./design-system/_buttons.css";
+@import "./design-system/_cards.css";
+@import "./design-system/_layout.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
