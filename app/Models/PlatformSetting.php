@@ -33,4 +33,22 @@ class PlatformSetting extends Model
             ]
         );
     }
+
+    public static function mediaUrl(string $key, ?string $defaultPath = null): string
+    {
+        $val = self::get($key);
+        if (empty($val)) {
+            return $defaultPath ? asset($defaultPath) : '';
+        }
+        if (str_starts_with($val, 'http://') || str_starts_with($val, 'https://')) {
+            return $val;
+        }
+        if (str_starts_with($val, 'storage/') || str_starts_with($val, 'images/') || str_starts_with($val, 'videos/') || str_starts_with($val, 'home/')) {
+            return asset($val);
+        }
+        if (file_exists(public_path('storage/' . $val))) {
+            return asset('storage/' . $val);
+        }
+        return asset($val);
+    }
 }

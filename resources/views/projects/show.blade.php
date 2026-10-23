@@ -27,7 +27,7 @@
             position: fixed;
             inset: 0;
             z-index: -2;
-            background-image: url('{{ $project->image ? asset('images/projects/' . $project->image) : '' }}');
+            background-image: url('{{ $project->image_url }}');
             background-position: center;
             background-size: cover;
             background-attachment: fixed;
@@ -764,8 +764,8 @@
 
         <!-- 1. Hero Section -->
         <div class="glass-card project-hero fade-in">
-            @if ($project->logo)
-                <img src="{{ asset('images/projects_logo/' . $project->logo) }}" alt="{{ $project->name }}"
+            @if ($project->logo_url)
+                <img src="{{ $project->logo_url }}" alt="{{ $project->name }}"
                     class="hero-logo">
             @endif
             <h1 class="hero-title">{{ $project->name }}</h1>
@@ -1042,7 +1042,7 @@
                         </p>
                         @if ($project->latitude && $project->longitude)
                             <div
-                                style="position: relative; width: 100%; height: 300px; background: url('{{ asset('images/projects/' . $project->image) }}') center/cover; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.5);">
+                                style="position: relative; width: 100%; height: 300px; background: url('{{ $project->image_url }}') center/cover; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.5);">
                                 <div
                                     style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px);">
                                 </div>
@@ -1069,7 +1069,7 @@
                         <div class="gallery-grid"
                             style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
                             @foreach ($project->images as $img)
-                                <img src="{{ asset('images/projects/' . $img->image) }}" loading="lazy"
+                                <img src="{{ $img->image_url }}" loading="lazy"
                                     alt="Project Image"
                                     style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border);">
                             @endforeach

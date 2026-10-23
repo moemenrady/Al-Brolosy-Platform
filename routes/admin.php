@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\ConciergeStepController;
 use App\Http\Controllers\Admin\SmartCardController;
+use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\ClientInterestController;
 use Illuminate\Support\Facades\Route;
 
@@ -101,6 +102,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/orders/{id}', [AdminController::class, 'showOrder'])->name('orders.show');
     Route::put('/orders/{id}/status', [AdminController::class, 'updateStatusOrder'])->name('orders.updateStatus');
 
-    Route::get('hero', [AdminController::class, 'editHeroImage'])->name('hero.edit');
-    Route::post('hero', [AdminController::class, 'updateHeroImage'])->name('hero.update');
+    // إدارة الوسائط والهوية البصرية (الفيديوهات والبوسترات والشعارات)
+    Route::get('assets', [AssetController::class, 'index'])->name('assets.index');
+    Route::post('assets', [AssetController::class, 'update'])->name('assets.update');
+    Route::post('assets/reset/{key}', [AssetController::class, 'reset'])->name('assets.reset');
+    Route::get('hero', [AssetController::class, 'index'])->name('hero.edit');
+    Route::post('hero', [AssetController::class, 'update'])->name('hero.update');
 });

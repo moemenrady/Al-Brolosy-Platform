@@ -16,8 +16,7 @@
             <!-- الكرت الأول: م. صلاح البرلسي -->
             <a href="{{ route('founders.salah') }}" class="visionary-card vision-card-link">
                 <div class="v-image-wrapper">
-                    <!-- استبدل مسار الصورة بصورة البشمهندس صلاح -->
-                    <img src="{{ asset('home/salah.png') }}" alt="م. صلاح البرلسي" class="v-img">
+                    <img src="{{ \App\Models\PlatformSetting::mediaUrl('founder_salah_image', 'home/salah.png') }}" alt="م. صلاح البرلسي" class="v-img">
                     <div class="v-gradient-overlay"></div>
                 </div>
 
@@ -54,8 +53,7 @@
             <!-- الكرت الثاني: م. غانم البرلسي -->
             <a href="{{ route('founders.ghanem') }}" class="visionary-card vision-card-link">
                 <div class="v-image-wrapper">
-                    <!-- استبدل مسار الصورة بصورة البشمهندس غانم -->
-                    <img src="{{ asset('home/ghanem.png') }}" alt="م. غانم البرلسي" class="v-img">
+                    <img src="{{ \App\Models\PlatformSetting::mediaUrl('founder_ghanem_image', 'home/ghanem.png') }}" alt="م. غانم البرلسي" class="v-img">
                     <div class="v-gradient-overlay"></div>
                 </div>
 
@@ -95,7 +93,7 @@
     <!-- خلفية الفيديو مع الدارك فيلتر الفخم -->
     <div class="video-bg-wrapper">
         <video autoplay loop muted playsinline class="legacy-video">
-            <source src="{{ asset('videos/d_hero3.mp4') }}" type="video/mp4">
+            <source src="{{ \App\Models\PlatformSetting::mediaUrl('legacy_video', 'videos/d_hero3.mp4') }}" type="video/mp4">
         </video>
         <div class="video-dark-filter"></div>
     </div>

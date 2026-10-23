@@ -54,6 +54,60 @@ class Project extends Model
           : \App\Models\PlatformSetting::get('booking_whatsapp_number', '201032550422');
   }
 
+  public function getImageUrlAttribute(): string
+  {
+      if (!$this->image) return asset('albrolosy_logo.png');
+      if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+          return $this->image;
+      }
+      if (file_exists(public_path('storage/' . $this->image))) {
+          return asset('storage/' . $this->image);
+      }
+      if (file_exists(public_path('images/projects/' . $this->image))) {
+          return asset('images/projects/' . $this->image);
+      }
+      if (file_exists(public_path($this->image))) {
+          return asset($this->image);
+      }
+      return asset('images/projects/' . $this->image);
+  }
+
+  public function getHoverImageUrlAttribute(): string
+  {
+      if (!$this->hover_image) return $this->image_url;
+      if (str_starts_with($this->hover_image, 'http://') || str_starts_with($this->hover_image, 'https://')) {
+          return $this->hover_image;
+      }
+      if (file_exists(public_path('storage/' . $this->hover_image))) {
+          return asset('storage/' . $this->hover_image);
+      }
+      if (file_exists(public_path('images/projects/' . $this->hover_image))) {
+          return asset('images/projects/' . $this->hover_image);
+      }
+      if (file_exists(public_path($this->hover_image))) {
+          return asset($this->hover_image);
+      }
+      return asset('images/projects/' . $this->hover_image);
+  }
+
+  public function getLogoUrlAttribute(): ?string
+  {
+      if (!$this->logo) return null;
+      if (str_starts_with($this->logo, 'http://') || str_starts_with($this->logo, 'https://')) {
+          return $this->logo;
+      }
+      if (file_exists(public_path('storage/' . $this->logo))) {
+          return asset('storage/' . $this->logo);
+      }
+      if (file_exists(public_path('images/projects_logo/' . $this->logo))) {
+          return asset('images/projects_logo/' . $this->logo);
+      }
+      if (file_exists(public_path($this->logo))) {
+          return asset($this->logo);
+      }
+      return asset('storage/' . $this->logo);
+  }
+
   /*
     |--------------------------------------------------------------------------
     | RELATIONS

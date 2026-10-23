@@ -569,7 +569,7 @@
     </nav>
 
     <video autoplay muted loop class="bg-overlay-video">
-        <source src="{{ asset('home/base_video_desktop.mp4') }}" type="video/mp4">
+        <source src="{{ \App\Models\PlatformSetting::mediaUrl('profile_video', 'home/base_video_desktop.mp4') }}" type="video/mp4">
     </video>
 
     <main class="profile-page">

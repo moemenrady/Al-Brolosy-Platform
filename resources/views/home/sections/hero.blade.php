@@ -911,10 +911,12 @@
         عشان الموبايل ميحملش فيديو الديسكتوب والعكس.
     -->
     <video id="d_hero-video" class="hero-video" muted loop playsinline preload="none"
-        poster="{{ asset('images/d_hero-poster.webp') }}" data-src="{{ asset('videos/d_hero.mp4') }}">
+        poster="{{ \App\Models\PlatformSetting::mediaUrl('hero_desktop_poster', 'images/d_hero-poster.webp') }}" 
+        data-src="{{ \App\Models\PlatformSetting::mediaUrl('hero_desktop_video', 'videos/d_hero.mp4') }}">
     </video>
     <video id="m_hero-video" class="hero-video" muted loop playsinline preload="none"
-        poster="{{ asset('images/m_hero-poster.webp') }}" data-src="{{ asset('videos/m_hero.mp4') }}">
+        poster="{{ \App\Models\PlatformSetting::mediaUrl('hero_mobile_poster', 'images/d_hero-poster.webp') }}" 
+        data-src="{{ \App\Models\PlatformSetting::mediaUrl('hero_mobile_video', 'videos/m_hero.mp4') }}">
     </video>
 
     <!-- طبقة التعتيم السينمائي -->

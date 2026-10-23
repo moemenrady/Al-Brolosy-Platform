@@ -4,10 +4,12 @@
     <!-- خلفية الفيديو المدمجة مع التحميل الديناميكي حسب نوع الجهاز -->
     <div class="project-video-bg-wrapper">
         <video id="d_hero2-video" class="project-hero-video" muted loop playsinline preload="none"
-            poster="{{ asset('images/d_hero2-poster.webp') }}" data-src="{{ asset('videos/d_hero2.mp4') }}">
+            poster="{{ \App\Models\PlatformSetting::mediaUrl('hero2_desktop_poster', 'images/d_hero-poster.webp') }}" 
+            data-src="{{ \App\Models\PlatformSetting::mediaUrl('hero2_desktop_video', 'videos/d_hero2.mp4') }}">
         </video>
         <video id="m_hero2-video" class="project-hero-video" muted loop playsinline preload="none"
-            poster="{{ asset('images/m_hero2-poster.webp') }}" data-src="{{ asset('videos/m_hero2.mp4') }}">
+            poster="{{ \App\Models\PlatformSetting::mediaUrl('hero2_mobile_poster', 'images/d_hero-poster.webp') }}" 
+            data-src="{{ \App\Models\PlatformSetting::mediaUrl('hero2_mobile_video', 'videos/m_hero2.mp4') }}">
         </video>
         
         <!-- طبقة التعتيم والتدرج السينمائي لتعزيز التباين -->

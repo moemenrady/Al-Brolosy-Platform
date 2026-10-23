@@ -634,6 +634,11 @@
                 </div>
                 <ul class="submenu">
                     <li>
+                        <a href="{{ route('admin.assets.index') }}" class="submenu-link {{ request()->routeIs('admin.assets.*', 'admin.hero.*') ? 'active' : '' }}" style="color: var(--gold); font-weight: 700;">
+                            <i class="fa-solid fa-photo-film" style="margin-left: 6px;"></i> الفيديوهات والوسائط ✦
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.users.index') }}" class="submenu-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                             المستخدمين والصلاحيات
                         </a>
