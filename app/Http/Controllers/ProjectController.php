@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-  public function show($id)
+    public function index()
+    {
+        return redirect()->to(url('/#projects'));
+    }
+
+    public function show($id)
     {
         // 1. Eager Load all necessary relations based on NEW ARCHITECTURE
         $project = Project::with([
