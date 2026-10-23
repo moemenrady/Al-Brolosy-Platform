@@ -9,9 +9,6 @@ Route::get('/', [HomeController::class, 'create']);
 Route::get('collection/{id}', [CollectionController::class, 'collection'])->name('collection.show');
 Route::get('search/', [HomeController::class, 'search'])->name('search');
 
-Route::get('admin/smart-cards', [AdminController::class, 'smartCards'])->name('admin.smart-cards');
-
-
 // استدعاء ملف الـ product routes
 
 require __DIR__ . '/home.php';

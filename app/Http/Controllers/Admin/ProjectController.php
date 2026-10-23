@@ -49,14 +49,13 @@ class ProjectController extends Controller
     {
         $request->validate([
             'sector_id' => 'required|exists:sectors,id',
-
             'name_ar' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
-
-            'image' => 'required|image',
-
-            'hover_image' => 'nullable|image',
-            'logo' => 'nullable|image',
+            'image' => 'nullable|image|max:10240',
+            'price_budget' => 'nullable|string|max:255',
+            'booking_phone' => 'nullable|string|max:50',
+            'hover_image' => 'nullable|image|max:10240',
+            'logo' => 'nullable|image|max:10240',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -67,7 +66,7 @@ class ProjectController extends Controller
 
             $image = $request->file('image')
                 ? $request->file('image')->store('projects', 'public')
-                : null;
+                : 'projects/default.jpg';
 
             $hoverImage = $request->file('hover_image')
                 ? $request->file('hover_image')->store('projects', 'public')
@@ -106,8 +105,9 @@ class ProjectController extends Controller
                 'hover_image' => $hoverImage,
 
                 'price_budget' => $request->price_budget,
+                'booking_phone' => $request->booking_phone,
 
-                'status' => $request->status,
+                'status' => $request->status ?? 'launched',
 
                 'delivery_time' => $request->delivery_time,
 
@@ -303,6 +303,7 @@ class ProjectController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'price_budget' => $request->price_budget,
+                'booking_phone' => $request->booking_phone,
                 'status' => $request->status,
                 'delivery_time' => $request->delivery_time,
                 'sort_order' => $request->sort_order ?? 0,

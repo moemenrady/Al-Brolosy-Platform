@@ -81,6 +81,66 @@
             background: var(--gold);
         }
 
+        /* ========================================================= */
+        /* Global Form Controls & Select Dropdown High-Contrast Fix  */
+        /* ========================================================= */
+        select, option, optgroup, input, textarea {
+            font-family: 'Cairo', sans-serif !important;
+        }
+
+        html[data-theme="dark"] select,
+        html[data-theme="dark"] option,
+        html[data-theme="dark"] optgroup {
+            color-scheme: dark !important;
+            background-color: #16161a !important;
+            color: #f1f1f1 !important;
+        }
+
+        html[data-theme="dark"] select:focus {
+            border-color: var(--gold) !important;
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(215, 182, 74, 0.25) !important;
+        }
+
+        html[data-theme="dark"] select option {
+            background-color: #1a1a20 !important;
+            color: #ffffff !important;
+            padding: 10px 12px !important;
+        }
+
+        html[data-theme="dark"] select option:checked,
+        html[data-theme="dark"] select option:hover {
+            background-color: #2c2c36 !important;
+            color: var(--gold) !important;
+        }
+
+        html[data-theme="light"] select,
+        html[data-theme="light"] option,
+        html[data-theme="light"] optgroup {
+            color-scheme: light !important;
+            background-color: #ffffff !important;
+            color: #1a1a1a !important;
+        }
+
+        html[data-theme="light"] select option {
+            background-color: #ffffff !important;
+            color: #1a1a1a !important;
+            padding: 10px 12px !important;
+        }
+
+        html[data-theme="light"] select option:checked,
+        html[data-theme="light"] select option:hover {
+            background-color: #f0f4f8 !important;
+            color: var(--primary-red) !important;
+        }
+
+        .form-control, .form-control-lux, select.form-control, select.form-control-lux {
+            background-color: var(--bg-card) !important;
+            color: var(--text-main) !important;
+            border: 1px solid var(--glass-border) !important;
+            border-radius: 8px !important;
+        }
+
         /* ===================================== */
         /* 2. القائمة الجانبية (Sidebar)         */
         /* ===================================== */

@@ -53,9 +53,9 @@
 
     .form-control-lux {
         width: 100%;
-        background: rgba(228, 220, 199, 0.05);
-        border: 1px solid var(--glass-border);
-        color: var(--text-main);
+        background: #16161a !important;
+        border: 1px solid rgba(215, 182, 74, 0.25) !important;
+        color: #ffffff !important;
         padding: 0.65rem 0.9rem;
         border-radius: 8px;
         font-family: inherit;
@@ -64,8 +64,16 @@
         transition: border-color 0.3s;
     }
 
+    select.form-control-lux,
+    select.form-control-lux option,
+    select.form-control-lux optgroup {
+        background-color: #1a1a20 !important;
+        color: #ffffff !important;
+    }
+
     .form-control-lux:focus {
-        border-color: var(--gold);
+        border-color: var(--gold) !important;
+        box-shadow: 0 0 8px rgba(215, 182, 74, 0.2) !important;
     }
 
     .btn-lux {

@@ -1,5 +1,5 @@
    <!DOCTYPE html>
-   <html id="htmlRoot" lang="en" dir="ltr">
+   <html id="htmlRoot" lang="ar" dir="rtl">
 
    <head>
 

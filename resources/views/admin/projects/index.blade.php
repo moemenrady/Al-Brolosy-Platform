@@ -400,10 +400,10 @@
             </p>
         </div>
 
-        <button type="button" onclick="openCreateForm()" class="btn-gold" id="topActionBtn">
+        <a href="{{ route('admin.projects.create') }}" class="btn-gold" id="topActionBtn">
             <i class="fa-solid fa-plus"></i>
-            <span data-en="Add New Project" data-ar="إضافة مشروع جديد">Add New Project</span>
-        </button>
+            <span data-en="Add New Project" data-ar="إضافة مشروع جديد">إضافة مشروع جديد</span>
+        </a>
     </div>
 
     @if (session('success'))
@@ -690,16 +690,19 @@
 
                             <td>
                                 <div class="action-group">
-                                    <button type="button" class="btn-icon" title="Edit Project"
-                                        onclick='populateEditForm(@js($project->load(["unitTypes", "paymentPlans", "features", "images"])))'>
+                                    <a href="{{ route('projects.show', $project->id) }}" target="_blank" class="btn-icon" title="عرض في المنصة" style="color: var(--gold);">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </a>
+
+                                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn-icon" title="تعديل المشروع الشامل">
                                         <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
+                                    </a>
 
                                     <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this project? This action cannot be undone.');">
+                                        onsubmit="return confirm('هل أنت متأكد من حذف هذا المشروع؟ لا يمكن التراجع عن هذا الإجراء.');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn-icon delete" title="Delete Project">
+                                        <button type="submit" class="btn-icon delete" title="حذف المشروع">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </form>

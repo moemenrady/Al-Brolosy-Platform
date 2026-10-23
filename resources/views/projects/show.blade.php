@@ -573,105 +573,189 @@
             box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
+        /* ========================================================= */
+        /* Al-Brolosy Luxury Light Theme Styling                     */
+        /* ========================================================= */
+        html:not(.dark) {
+            --brolosy-gold: #c5a059;
+            --brolosy-red: #B40000;
+            --brolosy-bg: #F8F9FA;
+            --brolosy-border: rgba(197, 160, 89, 0.28);
+        }
+
+        html:not(.dark) .project-page {
+            background-color: var(--brolosy-bg);
+            color: #111827;
+        }
+
+        html:not(.dark) .glass-card {
+            background: #FFFFFF !important;
+            border: 1px solid var(--brolosy-border) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+            border-radius: 20px !important;
+        }
+
+        html:not(.dark) .hero-title {
+            color: #111827 !important;
+            font-weight: 800 !important;
+        }
+
+        html:not(.dark) .badge {
+            background: #FFFFFF !important;
+            border: 1px solid rgba(197, 160, 89, 0.35) !important;
+            color: #1F2937 !important;
+            font-weight: 700 !important;
+        }
+
+        html:not(.dark) .badge-primary {
+            background: #B40000 !important;
+            color: #ffffff !important;
+            border-color: #B40000 !important;
+        }
+
+        html:not(.dark) .actual-unit-item {
+            background: #FFFFFF !important;
+            border: 1px solid rgba(197, 160, 89, 0.25) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03) !important;
+        }
+
+        html:not(.dark) .unit-price-tag {
+            color: #B40000 !important;
+            font-weight: 800 !important;
+        }
+
+        html:not(.dark) .plan-card {
+            background: #FFFFFF !important;
+            border: 1px solid rgba(197, 160, 89, 0.28) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        html:not(.dark) .plan-card .down-payment {
+            color: #B40000 !important;
+            font-size: 1.8rem !important;
+            font-weight: 800 !important;
+        }
+
+        html:not(.dark) .feature-box {
+            background: #FFFFFF !important;
+            border: 1px solid rgba(197, 160, 89, 0.22) !important;
+        }
+
+        html:not(.dark) .input-group input,
+        html:not(.dark) .styled-select {
+            background: #F9FAFB !important;
+            color: #111827 !important;
+            border: 1.5px solid rgba(197, 160, 89, 0.35) !important;
+        }
+
         /* ===================================== */
-        /* Ultimate Sticky Booking Button        */
+        /* Responsive Floating Booking Bar       */
         /* ===================================== */
-        .sticky-booking-btn {
+        .sticky-booking-bar {
             position: fixed;
-            bottom: 30px;
+            bottom: 25px;
             inset-inline-start: 50%;
             transform: translateX(-50%);
             z-index: 9990;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            padding: 1.2rem 3.5rem;
-            font-size: 1.3rem;
-            font-weight: 800;
-            font-family: inherit;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Glowing aura effect */
-        .sticky-booking-btn::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
+            background: rgba(17, 24, 39, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 8px 14px;
             border-radius: 50px;
-            background: inherit;
-            opacity: 0.4;
-            z-index: -1;
-            animation: pulseGlow 2s infinite;
+            border: 1px solid rgba(215, 182, 74, 0.45);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+            max-width: 95%;
+            width: auto;
         }
 
-        @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                opacity: 0.5;
+        html:not(.dark) .sticky-booking-bar {
+            background: rgba(255, 255, 255, 0.96);
+            border-color: rgba(197, 160, 89, 0.55);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .sticky-btn-primary {
+            background: #B40000;
+            color: #ffffff !important;
+            border: none;
+            border-radius: 50px;
+            padding: 0.85rem 1.8rem;
+            font-size: 1.05rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(180, 0, 0, 0.3);
+            font-family: inherit;
+        }
+
+        .sticky-btn-primary:hover {
+            transform: translateY(-2px);
+            background: #d80000;
+            box-shadow: 0 6px 20px rgba(180, 0, 0, 0.4);
+        }
+
+        .sticky-btn-call {
+            background: rgba(215, 182, 74, 0.16);
+            color: #d7b64a !important;
+            border: 1px solid rgba(215, 182, 74, 0.4);
+            border-radius: 50px;
+            padding: 0.85rem 1.4rem;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        html:not(.dark) .sticky-btn-call {
+            background: rgba(197, 160, 89, 0.15);
+            color: #92400e !important;
+            border-color: rgba(197, 160, 89, 0.45);
+        }
+
+        .sticky-btn-call:hover {
+            background: #d7b64a;
+            color: #000000 !important;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 85px;
             }
-
-            50% {
-                transform: scale(1.04);
-                opacity: 0.1;
+            .sticky-booking-bar {
+                bottom: 12px;
+                width: 95%;
+                padding: 6px 10px;
+                justify-content: space-between;
+                gap: 8px;
             }
-
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
+            .sticky-btn-primary {
+                flex: 1.3;
+                justify-content: center;
+                padding: 0.75rem 0.9rem;
+                font-size: 0.9rem;
+            }
+            .sticky-btn-call {
+                flex: 1;
+                justify-content: center;
+                padding: 0.75rem 0.7rem;
+                font-size: 0.85rem;
             }
         }
-
-        .sticky-booking-btn:hover {
-            transform: translateX(-50%) translateY(-6px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .sticky-booking-btn svg {
-            transition: transform 0.3s ease;
-        }
-
-        .sticky-booking-btn:hover svg {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-  @media (max-width: 768px) {
-    body {
-        /* ترك مسافة كافية في أسفل الصفحة حتى لا يغطي الزر على المحتوى */
-        padding-bottom: 90px; 
-    }
-
-    .sticky-booking-btn {
-        bottom: 0; /* التصاق تام بالأسفل */
-        inset-inline-start: 0;
-        transform: none; /* إلغاء التوسيط بالـ transform لأنه سيأخذ العرض بالكامل */
-        width: 100%;
-        max-width: 100%;
-        padding: 1.2rem;
-        font-size: 1.2rem;
-        /* زوايا دائرية من الأعلى فقط */
-        border-radius: 20px 20px 0 0; 
-        /* ظل علوي بارز */
-        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15); 
-        z-index: 9999;
-    }
-
-    /* إيقاف تأثير النبض (Pulse) على الموبايل لتوفير أداء البطارية وتجنب التشتت البصري */
-    .sticky-booking-btn::after {
-        display: none; 
-    }
-
-    .sticky-booking-btn:hover {
-        /* إلغاء حركة التحويم (Hover) لأنها غير فعالة على شاشات اللمس */
-        transform: none; 
-    }
-}
     </style>
 @endpush
 
@@ -695,7 +779,19 @@
                 <span class="badge">{{ $project->location }}</span>
             </div>
 
-            <div class="hero-actions">
+            <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                <button type="button" onclick="openBookingModal()" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; border:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
+                    </svg>
+                    <span>{{ app()->getLocale() == 'ar' ? 'احجز وحدتك عبر واتساب' : 'Book on WhatsApp' }}</span>
+                </button>
+                <a href="tel:{{ $project->effective_booking_phone }}" class="btn-outline" style="display:inline-flex; align-items:center; gap:8px;" dir="ltr">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span>{{ $project->effective_booking_phone }}</span>
+                </a>
                 <a href="#units"
                     class="btn-outline">{{ app()->getLocale() == 'ar' ? 'استعرض الوحدات' : 'Explore Units' }}</a>
             </div>
@@ -1023,15 +1119,22 @@
         </div>
     </div>
 
-    <!-- Floating Global Booking Button (Replaces duplicate bottom bar for better UX) -->
-    <button class="sticky-booking-btn" onclick="openBookingModal()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-            <path
-                d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
-        </svg>
-        <span data-ar="احجز وحدتك الآن"
-            data-en="Book Your Unit Now">{{ app()->getLocale() == 'ar' ? 'احجز وحدتك الآن' : 'Book Your Unit Now' }}</span>
-    </button>
+    <!-- Floating Global Booking Bar (Responsive on Mobile & Desktop) -->
+    <div class="sticky-booking-bar">
+        <button type="button" class="sticky-btn-primary" onclick="openBookingModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
+            </svg>
+            <span data-ar="احجز وحدتك الآن عبر واتساب" data-en="Book on WhatsApp">{{ app()->getLocale() == 'ar' ? 'احجز وحدتك عبر واتساب' : 'Book on WhatsApp' }}</span>
+        </button>
+
+        <a href="tel:{{ $project->effective_booking_phone }}" class="sticky-btn-call" title="اتصال مبيعات مباشر">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span data-ar="اتصال هاتفي" data-en="Direct Call">{{ app()->getLocale() == 'ar' ? 'اتصال هاتفي' : 'Call Sales' }}</span>
+        </a>
+    </div>
 
     <!-- ===================================== -->
     <!-- Booking Modal (Frontend WhatsApp Logic) -->
@@ -1092,6 +1195,13 @@
                             d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
                     </svg>
                 </button>
+
+                <div style="margin-top: 1.2rem; text-align: center; font-size: 0.92rem; color: var(--muted); border-top: 1px dashed var(--border); padding-top: 0.9rem;">
+                    <span>{{ app()->getLocale() == 'ar' ? 'أو تواصل مباشرة مع فريق مبيعات المشروع:' : 'Or call the project sales team directly:' }}</span>
+                    <a href="tel:{{ $project->effective_booking_phone }}" style="color: var(--primary); font-weight: 800; text-decoration: none; display: inline-block; margin-inline-start: 6px;" dir="ltr">
+                        <i class="fa-solid fa-phone" style="font-size:0.8rem;"></i> {{ $project->effective_booking_phone }}
+                    </a>
+                </div>
             </form>
 
             <div id="bookingSuccessMessage" class="success-msg" style="display: none;">
@@ -1115,7 +1225,7 @@
         const bookingModal = document.getElementById('bookingModalOverlay');
         const bookingForm = document.getElementById('bookingMicroForm');
         const bookingSuccessMsg = document.getElementById('bookingSuccessMessage');
-        const WHATSAPP_NUMBER = "201032550422";
+        const WHATSAPP_NUMBER = "{{ $project->effective_booking_phone }}";
 
         // إغلاق المودال عند الضغط خارجه
         bookingModal.addEventListener('click', function(e) {

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CrmController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\ConciergeStepController;
+use App\Http\Controllers\Admin\SmartCardController;
 use App\Http\Controllers\ClientInterestController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +72,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     // تحليلات السلوك والتقارير
     Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
     Route::get('analytics/export', [AnalyticsController::class, 'exportReport'])->name('analytics.export');
+
+    // إدارة الكروت الذكية VIP
+    Route::get('smart-cards', [SmartCardController::class, 'index'])->name('smart-cards');
+    Route::get('smart-cards/list', [SmartCardController::class, 'index'])->name('smart-cards.index');
+    Route::put('smart-cards/{smartCard}', [SmartCardController::class, 'update'])->name('smart-cards.update');
+    Route::post('smart-cards/assign', [SmartCardController::class, 'assign'])->name('smart-cards.assign');
+    Route::post('smart-cards/{smartCard}/unlink', [SmartCardController::class, 'unlink'])->name('smart-cards.unlink');
+    Route::post('smart-cards/generate', [SmartCardController::class, 'generateBulk'])->name('smart-cards.generate');
 
     // المنتجات والمجموعات والطلبات الحالية (الحفاظ على كافة الفيتشرز الموجودة)
     Route::get('products/create', [AdminController::class, 'addProduct'])->name('products.create');

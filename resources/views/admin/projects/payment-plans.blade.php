@@ -77,11 +77,14 @@
         border-radius: 16px; width: 100%; max-width: 550px; padding: 2rem;
     }
     .form-control-lux {
-        width: 100%; background: rgba(228, 220, 199, 0.05); border: 1px solid var(--glass-border);
-        color: var(--text-main); padding: 0.65rem 0.9rem; border-radius: 8px; font-family: inherit;
+        width: 100%; background: #16161a !important; border: 1px solid rgba(215, 182, 74, 0.25) !important;
+        color: #ffffff !important; padding: 0.65rem 0.9rem; border-radius: 8px; font-family: inherit;
         font-size: 0.9rem; outline: none; margin-top: 0.3rem;
     }
-    .form-control-lux:focus { border-color: var(--gold); }
+    .form-control-lux:focus { border-color: var(--gold) !important; box-shadow: 0 0 8px rgba(215, 182, 74, 0.2) !important; }
+    select.form-control-lux, select.form-control-lux option {
+        background-color: #1a1a20 !important; color: #ffffff !important;
+    }
 </style>
 
 <div class="plans-page">

@@ -37,6 +37,7 @@ class Project extends Model
     'is_active',
 
     'delivery_time',
+    'booking_phone',
   ];
 
   protected $casts = [
@@ -45,6 +46,13 @@ class Project extends Model
     'featured' => 'boolean',
     'is_active' => 'boolean',
   ];
+
+  public function getEffectiveBookingPhoneAttribute()
+  {
+      return !empty($this->booking_phone)
+          ? $this->booking_phone
+          : \App\Models\PlatformSetting::get('booking_whatsapp_number', '201032550422');
+  }
 
   /*
     |--------------------------------------------------------------------------
