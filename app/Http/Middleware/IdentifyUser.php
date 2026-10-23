@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use App\Models\Identity;
 use App\Models\UserSetting;
+use App\Models\UserBehavior;
+use App\Models\Client;
 
 class IdentifyUser
 {
@@ -16,42 +18,44 @@ class IdentifyUser
     {
         $guestId = $request->cookie('guest_id');
 
-        /*
-        |--------------------------------------------------------------------------
-        | Guest لأول مرة
-        |--------------------------------------------------------------------------
-        */
-
         if (!$guestId) {
             $guestId = (string) Str::uuid();
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | تحديد الـ Identity
-        |--------------------------------------------------------------------------
-        */
-
         if (Auth::check()) {
+            $userId = Auth::id();
+            $userIdentity = Identity::where('user_id', $userId)->first();
+            $guestIdentity = Identity::where('guest_id', $guestId)->first();
 
-            // هل يوجد Guest حالياً؟
-            $identity = Identity::where('guest_id', $guestId)->first();
+            if ($userIdentity) {
+                // If there is an existing guest identity from this session, merge any data into userIdentity
+                if ($guestIdentity && $guestIdentity->id !== $userIdentity->id) {
+                    UserBehavior::where('identity_id', $guestIdentity->id)
+                        ->update(['identity_id' => $userIdentity->id]);
 
-            if ($identity) {
+                    if (!$userIdentity->client && $guestIdentity->client) {
+                        $guestIdentity->client->update(['identity_id' => $userIdentity->id]);
+                    }
 
-                // اربطه بالمستخدم
-                if (!$identity->user_id) {
-                    $identity->user_id = Auth::id();
+                    $guestIdentity->delete();
                 }
+
+                $userIdentity->guest_id = $guestId;
+                $userIdentity->ip = $request->ip();
+                $userIdentity->user_agent = $request->userAgent();
+                $userIdentity->save();
+
+                $identity = $userIdentity;
             } else {
-
-                // هل للمستخدم Identity قديمة؟
-                $identity = Identity::where('user_id', Auth::id())->first();
-
-                if (!$identity) {
-
+                if ($guestIdentity) {
+                    $guestIdentity->user_id = $userId;
+                    $guestIdentity->ip = $request->ip();
+                    $guestIdentity->user_agent = $request->userAgent();
+                    $guestIdentity->save();
+                    $identity = $guestIdentity;
+                } else {
                     $identity = Identity::create([
-                        'user_id'    => Auth::id(),
+                        'user_id'    => $userId,
                         'guest_id'   => $guestId,
                         'ip'         => $request->ip(),
                         'user_agent' => $request->userAgent(),
@@ -59,29 +63,19 @@ class IdentifyUser
                 }
             }
         } else {
-
             $identity = Identity::firstOrCreate(
-                [
-                    'guest_id' => $guestId,
-                ],
+                ['guest_id' => $guestId],
                 [
                     'ip' => $request->ip(),
                     'user_agent' => $request->userAgent(),
                 ]
             );
+
+            $identity->update([
+                'ip'         => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ]);
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | تحديث البيانات
-        |--------------------------------------------------------------------------
-        */
-
-        $identity->update([
-            'user_id'    => Auth::check() ? Auth::id() : $identity->user_id,
-            'ip'         => $request->ip(),
-            'user_agent' => $request->userAgent(),
-        ]);
 
         /*
         |--------------------------------------------------------------------------

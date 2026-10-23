@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Str;
 use App\Models\Identity;
 
-class IdentifyUser
+class LoadUserSettings
 {
     public function handle($request, Closure $next)
     {
