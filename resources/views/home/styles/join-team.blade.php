@@ -1,169 +1,243 @@
 <style>
-    /* ==========================================
-   Join Our Team Section
-   ========================================== */
-    .join-team-section {
-        position: relative;
-        width: 100%;
-        height: 85vh;
-        /* ارتفاع مناسب يبرز الفخامة */
-        min-height: 600px;
-        background-color: var(--black);
-        overflow: hidden;
-    }
+/* =========================================
+   متغيرات الألوان للوضع الفاتح والداكن
+   ========================================= */
+:root {
+    /* الوضع الفاتح (Light Mode) */
+    --jt-bg-color: #f8f9fa;
+    --jt-overlay-color: rgba(255, 255, 255, 0.85);
+    --jt-text-primary: #333333;
+    --jt-text-secondary: #555555;
+    --jt-card-bg: #ffffff;
+    --jt-card-border: rgba(100, 20, 30, 0.1);
+    --jt-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --jt-btn-bg: #611122;
+    --jt-btn-text: #ffffff;
+    --jt-btn-hover: #4a0d1a;
+    --jt-icon-color: #611122;
+}
 
-    .team-carousel-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
+[data-theme="dark"] {
+    /* الوضع الداكن (Dark Mode) - مطابق للصورة تماماً */
+    --jt-bg-color: #1a0508;
+    /* يمكنك وضع مسار صورة مباني هنا إذا توفرت لديك لتعطي نفس الإيحاء */
+    --jt-bg-image: url('https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2070&auto=format&fit=crop'); 
+    --jt-overlay-color: linear-gradient(135deg, rgba(74, 14, 23, 0.85) 0%, rgba(20, 5, 8, 0.95) 100%);
+    --jt-text-primary: #ffffff;
+    --jt-text-secondary: #e0e0e0;
+    --jt-card-bg: rgba(97, 17, 34, 0.4);
+    --jt-card-border: rgba(255, 255, 255, 0.1);
+    --jt-card-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    --jt-btn-bg: #ffffff;
+    --jt-btn-text: #611122;
+    --jt-btn-hover: #f0f0f0;
+    --jt-icon-color: #ffffff;
+}
 
-    /* السلايدر والصور */
-    .team-slider {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-    }
+/* =========================================
+   تنسيقات السيكشن الأساسية
+   ========================================= */
+.jt-section {
+    position: relative;
+    padding: 80px 20px;
+    background-color: var(--jt-bg-color);
+    background-image: var(--jt-bg-image, none);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    transition: background-color 0.4s ease;
+}
 
-    .team-slide {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        transition: opacity 1.5s ease-in-out;
-        z-index: 1;
-    }
+.jt-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--jt-overlay-color);
+    z-index: 1;
+    transition: background 0.4s ease;
+}
 
-    .team-slide.active {
-        opacity: 1;
-        z-index: 2;
-    }
+.jt-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
 
-    .team-slide-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: scale(1);
-        transition: transform 6s linear;
-        /* حركة زووم بطيئة جداً (Ken Burns) */
-    }
+/* =========================================
+   الهيدر (العنوان والوصف)
+   ========================================= */
+.jt-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
 
-    .team-slide.active .team-slide-img {
-        transform: scale(1.08);
-    }
+.jt-header h2 {
+    color: var(--jt-text-primary);
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif; /* خط كلاسيكي مطابق للصورة */
+}
 
-    /* طبقة التعتيم لجعل النص مقروء ولإضافة الفخامة */
-    .team-dark-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom,
-                rgba(0, 0, 0, 0.4) 0%,
-                rgba(0, 0, 0, 0.7) 50%,
-                rgba(0, 0, 0, 0.9) 100%);
-        z-index: 3;
-    }
+.jt-header p {
+    color: var(--jt-text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
 
-    /* محتوى النصوص */
-    .team-content-wrapper {
-        position: relative;
-        z-index: 4;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 0 5%;
-    }
+/* =========================================
+   الكروت (Cards)
+   ========================================= */
+.jt-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
 
-    .team-text-content {
-        max-width: 800px;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
+.jt-card {
+    background: var(--jt-card-bg);
+    border: 1px solid var(--jt-card-border);
+    border-radius: 16px;
+    padding: 50px 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--jt-card-shadow);
+    transition: transform 0.3s ease, background 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    .team-title {
-        color: var(--warm-beige);
+.jt-card:hover {
+    transform: translateY(-5px);
+}
+
+.jt-card-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    color: var(--jt-icon-color);
+}
+
+.jt-card h3 {
+    color: var(--jt-text-primary);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+}
+
+.jt-card p {
+    color: var(--jt-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    flex-grow: 1; /* لجعل الزر في الأسفل دائماً */
+}
+
+/* =========================================
+   الأزرار
+   ========================================= */
+.jt-btn {
+    display: inline-block;
+    background-color: var(--jt-btn-bg);
+    color: var(--jt-btn-text) !important;
+    text-decoration: none;
+    padding: 12px 35px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 250px;
+}
+
+.jt-btn:hover {
+    background-color: var(--jt-btn-hover);
+    transform: scale(1.02);
+}
+
+/* =========================================
+   شريط المميزات السفلي
+   ========================================= */
+.jt-features-bar {
+    background: var(--jt-card-bg);
+    border: 1px solid var(--jt-card-border);
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--jt-card-shadow);
+}
+
+.jt-feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.jt-feature-item svg {
+    width: 32px;
+    height: 32px;
+    color: var(--jt-icon-color);
+}
+
+.jt-feature-item span {
+    color: var(--jt-text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* =========================================
+   التجاوب مع الشاشات (Responsive)
+   ========================================= */
+@media (max-width: 992px) {
+    .jt-header h2 {
         font-size: 2.5rem;
-        font-weight: bold;
-        margin-bottom: 1.5rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
     }
+}
 
-    .team-description {
-        color: var(--off-white);
-        font-size: 1.1rem;
-        line-height: 1.8;
-        margin-bottom: 2.5rem;
-        font-weight: 300;
+@media (max-width: 768px) {
+    .jt-cards-wrapper {
+        grid-template-columns: 1fr; /* الكروت تحت بعضها في الموبايل */
     }
-
-    /* زر التصفح (متناسق مع الـ Hero) */
-    .btn-browse-jobs {
-        display: inline-block;
-        border: 1px solid var(--primary-red);
-        background-color: transparent;
-        color: var(--warm-beige);
-        padding: 0.8rem 2.5rem;
-        font-size: 1.1rem;
-        text-decoration: none;
-        transition: all 0.4s ease;
-        cursor: pointer;
+    
+    .jt-features-bar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* المميزات 2 في كل صف */
+        gap: 30px 15px;
+        padding: 30px 15px;
     }
+}
 
-    .btn-browse-jobs:hover {
-        background-color: var(--primary-red);
-        color: var(--off-white);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(180, 0, 0, 0.2);
+@media (max-width: 480px) {
+    .jt-header h2 {
+        font-size: 2rem;
     }
-
-    /* نقاط التحكم (Dots) */
-    .team-slider-dots {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 3rem;
+    
+    .jt-card {
+        padding: 40px 20px;
     }
-
-    .team-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background-color: var(--light-gray);
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
+    
+    .jt-features-bar {
+        grid-template-columns: 1fr; /* ميزة واحدة في كل صف للشاشات الصغيرة جداً */
     }
-
-    .team-dot:hover {
-        background-color: var(--warm-beige);
-    }
-
-    .team-dot.active {
-        background-color: var(--primary-red);
-        transform: scale(1.3);
-    }
-
-    /* استجابة الشاشات الصغيرة (Mobile) */
-    @media (max-width: 768px) {
-        .team-title {
-            font-size: 2rem;
-        }
-
-        .team-description {
-            font-size: 0.95rem;
-            padding: 0 10px;
-        }
-
-        .btn-browse-jobs {
-            padding: 0.7rem 2rem;
-            font-size: 1rem;
-        }
-
-        .join-team-section {
-            height: 70vh;
-            min-height: 500px;
-        }
-    }
+}
 </style>

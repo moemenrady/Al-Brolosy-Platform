@@ -242,9 +242,11 @@
             font-size: 1.6rem;
         }
     }
-    /* =========================================
+   /* =========================================
    Al-Brolosy Company Legacy Section
+   Light & Dark Theme
    ========================================= */
+
 .company-legacy-section {
     position: relative;
     padding: 8rem 5%;
@@ -252,10 +254,17 @@
     display: flex;
     align-items: center;
     overflow: hidden;
+
+    /* Dark Theme - Default */
     color: var(--text-main, #F0F0F0);
+
+    background-color: #0d0d0f;
 }
 
-/* Video Background & Dark Filter */
+/* =========================================
+   VIDEO BACKGROUND
+   ========================================= */
+
 .video-bg-wrapper {
     position: absolute;
     inset: 0;
@@ -271,29 +280,63 @@
     object-position: center;
 }
 
+/* Dark Theme Video Filter */
 .video-dark-filter {
     position: absolute;
     inset: 0;
-    /* فلتر داكن فخم مع تدرج لوني لدمجه مع باقي الصفحة */
-    background: linear-gradient(
-        to bottom, 
-        rgba(0, 0, 0, 0.9) 0%, 
-        rgba(13, 13, 15, 0.75) 50%, 
-        rgba(0, 0, 0, 0.95) 100%
-    );
-    backdrop-filter: blur(3px); /* تمويه خفيف لزيادة الفخامة والتركيز على النص */
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.90) 0%,
+            rgba(13, 13, 15, 0.78) 50%,
+            rgba(0, 0, 0, 0.95) 100%
+        );
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    transition:
+        background 0.5s ease,
+        backdrop-filter 0.5s ease;
 }
 
-/* Content Container */
+/* =========================================
+   LIGHT THEME VIDEO FILTER
+   ========================================= */
+
+html[data-theme="light"] .video-dark-filter {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.82) 0%,
+            rgba(248, 250, 252, 0.72) 50%,
+            rgba(255, 255, 255, 0.90) 100%
+        );
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+
+/* =========================================
+   CONTENT CONTAINER
+   ========================================= */
+
 .legacy-content-container {
     position: relative;
     z-index: 10;
+
     max-width: 1300px;
     margin: 0 auto;
     width: 100%;
 }
 
-/* Header */
+
+/* =========================================
+   HEADER
+   ========================================= */
+
 .legacy-header {
     text-align: center;
     margin-bottom: 5rem;
@@ -302,28 +345,58 @@
 .legacy-title {
     font-size: 3rem;
     font-weight: 800;
+
+    /* Dark */
     color: var(--warm-beige, #E4DCC7);
+
     margin-bottom: 1rem;
     letter-spacing: 1px;
+
+    transition: color 0.4s ease;
 }
 
 .legacy-subtitle {
     font-size: 1.2rem;
+
+    /* Dark */
     color: var(--text-main, #F0F0F0);
+
     max-width: 800px;
     margin: 0 auto 1.5rem;
+
     line-height: 1.8;
+
+    transition: color 0.4s ease;
 }
 
 .legacy-line {
     width: 80px;
     height: 3px;
+
     background-color: var(--primary-red, #B40000);
+
     margin: 0 auto;
     border-radius: 2px;
 }
 
-/* Main Grid (History & Philosophy) */
+
+/* =========================================
+   LIGHT HEADER
+   ========================================= */
+
+html[data-theme="light"] .legacy-title {
+    color: var(--black, #111111);
+}
+
+html[data-theme="light"] .legacy-subtitle {
+    color: var(--dark-gray, #444444);
+}
+
+
+/* =========================================
+   MAIN GRID
+   ========================================= */
+
 .legacy-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -337,107 +410,339 @@
     }
 }
 
+
+/* =========================================
+   LEGACY CARDS - DARK
+   ========================================= */
+
 .legacy-card {
-    background: rgba(13, 13, 15, 0.6);
+    background: rgba(13, 13, 15, 0.65);
+
     border: 1px solid rgba(228, 220, 199, 0.15);
+
     border-radius: 16px;
+
     padding: 3rem 2.5rem;
+
     backdrop-filter: blur(10px);
-    transition: transform 0.5s ease, border-color 0.5s ease;
+    -webkit-backdrop-filter: blur(10px);
+
+    transition:
+        transform 0.5s ease,
+        background 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
 }
 
 .legacy-card:hover {
     transform: translateY(-5px);
+
     border-color: var(--primary-red, #B40000);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.5);
 }
+
+
+/* =========================================
+   LEGACY CARDS - LIGHT
+   ========================================= */
+
+html[data-theme="light"] .legacy-card {
+    background: rgba(255, 255, 255, 0.78);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="light"] .legacy-card:hover {
+    border-color: var(--primary-red, #B40000);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================
+   CARD TITLE
+   ========================================= */
 
 .legacy-card-title {
     font-size: 1.8rem;
     font-weight: 700;
+
     color: var(--primary-red, #B40000);
+
     margin-bottom: 1.5rem;
+
     display: flex;
     align-items: center;
     gap: 15px;
+
+    transition: color 0.4s ease;
 }
+
+
+/* =========================================
+   CARD TEXT
+   ========================================= */
 
 .legacy-card-text {
     font-size: 1.1rem;
     line-height: 1.9;
+
+    /* Dark */
     color: var(--text-muted, #aaacb0);
+
     text-align: justify;
+
+    transition: color 0.4s ease;
 }
 
-/* Partnerships Section */
-.partnerships-wrapper {
-    background: linear-gradient(135deg, rgba(20, 20, 22, 0.9), rgba(0, 0, 0, 0.8));
-    border: 1px solid rgba(228, 220, 199, 0.1);
-    border-radius: 20px;
-    padding: 4rem 3rem;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+
+/* Light */
+html[data-theme="light"] .legacy-card-text {
+    color: #444444;
 }
+
+
+/* =========================================
+   PARTNERSHIPS SECTION - DARK
+   ========================================= */
+
+.partnerships-wrapper {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(20, 20, 22, 0.92),
+            rgba(0, 0, 0, 0.82)
+        );
+
+    border: 1px solid rgba(228, 220, 199, 0.1);
+
+    border-radius: 20px;
+
+    padding: 4rem 3rem;
+
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.6);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition:
+        background 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+
+/* =========================================
+   PARTNERSHIPS SECTION - LIGHT
+   ========================================= */
+
+html[data-theme="light"] .partnerships-wrapper {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.90),
+            rgba(248, 250, 252, 0.82)
+        );
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================
+   PARTNERSHIPS TITLE
+   ========================================= */
 
 .partnerships-title {
     font-size: 2.2rem;
     font-weight: 800;
+
+    /* Dark */
     color: var(--cream-beige, #E6E0D0);
+
     text-align: center;
     margin-bottom: 3rem;
+
+    transition: color 0.4s ease;
 }
+
+
+/* Light */
+html[data-theme="light"] .partnerships-title {
+    color: var(--black, #111111);
+}
+
+
+/* =========================================
+   PARTNERS GRID
+   ========================================= */
 
 .partners-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
     gap: 2rem;
 }
 
+
+/* =========================================
+   PARTNER ITEM - DARK
+   ========================================= */
+
 .partner-item {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.50);
+
     border-left: 3px solid var(--primary-red, #B40000);
+
     padding: 1.5rem;
+
     border-radius: 8px;
-    transition: background 0.3s ease;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-html[dir="ltr"] .partner-item {
-    border-left: 3px solid var(--primary-red, #B40000);
-    border-right: none;
-}
+
+/* RTL */
 html[dir="rtl"] .partner-item {
     border-right: 3px solid var(--primary-red, #B40000);
     border-left: none;
 }
 
-.partner-item:hover {
-    background: rgba(180, 0, 0, 0.1);
+
+/* LTR */
+html[dir="ltr"] .partner-item {
+    border-left: 3px solid var(--primary-red, #B40000);
+    border-right: none;
 }
+
+
+/* =========================================
+   PARTNER ITEM - LIGHT
+   ========================================= */
+
+html[data-theme="light"] .partner-item {
+    background: rgba(255, 255, 255, 0.80);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================
+   PARTNER HOVER
+   ========================================= */
+
+.partner-item:hover {
+    background: rgba(180, 0, 0, 0.10);
+
+    transform: translateY(-3px);
+}
+
+html[data-theme="light"] .partner-item:hover {
+    background: rgba(180, 0, 0, 0.06);
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   PARTNER NAME
+   ========================================= */
 
 .partner-name {
     font-size: 1.3rem;
     font-weight: 700;
+
+    /* Dark */
     color: var(--off-white, #F0F0F0);
+
     margin-bottom: 0.5rem;
+
+    transition: color 0.4s ease;
 }
+
+
+/* Light */
+html[data-theme="light"] .partner-name {
+    color: var(--black, #111111);
+}
+
+
+/* =========================================
+   PARTNER DESCRIPTION
+   ========================================= */
 
 .partner-desc {
     font-size: 0.95rem;
+
+    /* Dark */
     color: var(--text-muted, #aaacb0);
+
+    transition: color 0.4s ease;
 }
 
-/* Mobile Adjustments */
+
+/* Light */
+html[data-theme="light"] .partner-desc {
+    color: #666666;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
 @media (max-width: 768px) {
+
     .company-legacy-section {
         padding: 5rem 5%;
     }
+
     .legacy-title {
         font-size: 2.2rem;
     }
+
+    .legacy-subtitle {
+        font-size: 1rem;
+    }
+
+    .legacy-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .legacy-card-title {
+        font-size: 1.5rem;
+    }
+
+    .legacy-card-text {
+        font-size: 1rem;
+    }
+
     .partnerships-wrapper {
         padding: 2.5rem 1.5rem;
     }
-    .legacy-card {
-        padding: 2rem 1.5rem;
+
+    .partnerships-title {
+        font-size: 1.7rem;
+    }
+
+    .partners-grid {
+        grid-template-columns: 1fr;
     }
 }
 </style>

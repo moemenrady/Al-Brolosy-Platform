@@ -2,7 +2,10 @@ class Preferences {
 
     constructor() {
 
-        this.lang = localStorage.getItem("lang") || "en";
+        // اللغة الافتراضية = العربية
+        this.lang = localStorage.getItem("lang") || "ar";
+
+        // الثيم الافتراضي = Light
         this.theme = localStorage.getItem("theme") || "light";
 
     }
@@ -10,36 +13,47 @@ class Preferences {
     init() {
 
         if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", () => this.apply(), {
+
+            document.addEventListener("DOMContentLoaded", () => {
+                this.apply();
+            }, {
                 once: true
             });
+
             return;
         }
 
         this.apply();
-
     }
 
     apply() {
 
+        // اللغة
         document.documentElement.lang = this.lang;
 
+        // الاتجاه
         document.documentElement.dir =
-            this.lang == "ar" ? "rtl" : "ltr";
+            this.lang === "ar" ? "rtl" : "ltr";
 
+        // الثيم
         document.documentElement.dataset.theme = this.theme;
 
         document.documentElement.classList.toggle(
             "dark",
-            this.theme == "dark"
+            this.theme === "dark"
         );
 
+        // Body language class
         document.body?.classList.remove("ar", "en");
         document.body?.classList.add(this.lang);
 
+        // تحديث زر اللغة
         this.syncLocaleControls();
+
+        // ترجمة الصفحة
         this.translate();
 
+        // Event
         window.dispatchEvent(
             new CustomEvent("preferencesChanged", {
                 detail: {
@@ -48,14 +62,19 @@ class Preferences {
                 }
             })
         );
-
     }
 
     syncLocaleControls() {
 
         document.querySelectorAll(".lang-en, .lang-ar").forEach(el => {
+
             const isArabic = el.classList.contains("lang-ar");
-            el.classList.toggle("active", this.lang == (isArabic ? "ar" : "en"));
+
+            el.classList.toggle(
+                "active",
+                this.lang === (isArabic ? "ar" : "en")
+            );
+
         });
 
     }
@@ -63,21 +82,36 @@ class Preferences {
     translate() {
 
         document.querySelectorAll("[data-ar][data-en]").forEach(el => {
-            const value = this.lang == "ar" ? el.dataset.ar : el.dataset.en;
-            if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+
+            const value =
+                this.lang === "ar"
+                    ? el.dataset.ar
+                    : el.dataset.en;
+
+            if (
+                el.tagName === "INPUT" ||
+                el.tagName === "TEXTAREA"
+            ) {
                 el.setAttribute("placeholder", value);
             } else {
                 el.textContent = value;
             }
+
         });
 
-        document.querySelectorAll("[data-placeholder-ar][data-placeholder-en]").forEach(el => {
-            const value = this.lang == "ar"
-                ? el.dataset.placeholderAr
-                : el.dataset.placeholderEn;
-            el.setAttribute("placeholder", value);
-        });
+        document
+            .querySelectorAll(
+                "[data-placeholder-ar][data-placeholder-en]"
+            )
+            .forEach(el => {
 
+                const value =
+                    this.lang === "ar"
+                        ? el.dataset.placeholderAr
+                        : el.dataset.placeholderEn;
+
+                el.setAttribute("placeholder", value);
+            });
     }
 
     setLanguage(lang) {
@@ -87,15 +121,15 @@ class Preferences {
         localStorage.setItem("lang", lang);
 
         this.apply();
-
     }
 
     toggleLanguage() {
 
         this.setLanguage(
-            this.lang == "ar" ? "en" : "ar"
+            this.lang === "ar"
+                ? "en"
+                : "ar"
         );
-
     }
 
     setTheme(theme) {
@@ -105,17 +139,16 @@ class Preferences {
         localStorage.setItem("theme", theme);
 
         this.apply();
-
     }
 
     toggleTheme() {
 
         this.setTheme(
-            this.theme == "dark" ? "light" : "dark"
+            this.theme === "dark"
+                ? "light"
+                : "dark"
         );
-
     }
-
 }
 
 export default new Preferences();

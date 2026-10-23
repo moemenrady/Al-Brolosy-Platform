@@ -50,18 +50,40 @@
         color: var(--primary-red);
     }
 
-    /* Base Styling */
+    /* =========================================================
+   PORTFOLIO - OVERFLOW SAFE SYSTEM
+   ========================================================= */
+
     .portfolio-section {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
         background-color: var(--black);
         padding: 6rem 5%;
         position: relative;
         z-index: 25;
         transition: background-color 0.5s ease;
+
+        /* يمنع أي عنصر داخلي من توسيع السيكشن */
+        overflow-x: clip;
     }
 
     .portfolio-container {
+        width: 100%;
         max-width: 1400px;
         margin: 0 auto;
+        box-sizing: border-box;
+        min-width: 0;
+    }
+
+    /* مهم جدًا مع Flex */
+    .portfolio-header,
+    .portfolio-controls,
+    .filter-tabs-wrapper,
+    .sorting-dropdowns {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .portfolio-header {
@@ -69,6 +91,10 @@
         flex-direction: column;
         gap: 2rem;
         margin-bottom: 4rem;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
     }
 
     @media (min-width: 1024px) {
@@ -76,6 +102,16 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: flex-end;
+        }
+
+        .portfolio-header>.section-title-box {
+            min-width: 0;
+            flex: 1 1 auto;
+        }
+
+        .portfolio-header>.portfolio-controls {
+            min-width: 0;
+            flex: 0 1 auto;
         }
     }
 
@@ -560,6 +596,126 @@
         opacity: 1;
         transform: translateY(0);
     }
-    
-</style>
 
+    /* =========================================================
+   SECTOR FILTERS - NO HORIZONTAL SCROLL
+   ========================================================= */
+
+    .filter-tabs-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+        padding-bottom: 0;
+        box-sizing: border-box;
+    }
+
+    /* إزالة أي Scrollbar قديم */
+    .filter-tabs-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-tab {
+        background: transparent;
+        border: 1px solid var(--border-dark);
+        color: var(--light-gray);
+        padding: 0.6rem 1.2rem;
+        cursor: pointer;
+        white-space: nowrap;
+        border-radius: 4px;
+        transition: var(--transition-smooth);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+    }
+
+    .filter-tab:hover,
+    .filter-tab.active {
+        border-color: var(--primary-red);
+        color: var(--primary-red);
+        background-color: rgba(180, 0, 0, 0.05);
+    }
+
+    .filter-tab.action-btn {
+        border-color: var(--primary-red);
+        color: var(--primary-red);
+    }
+
+    .filter-tab.action-btn:hover {
+        background-color: var(--primary-red);
+        color: #fff;
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+        .filter-tabs-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            justify-content: flex-start;
+        }
+
+        .filter-tab {
+            padding: 0.55rem 0.9rem;
+            font-size: 0.8rem;
+        }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 400px) {
+        .filter-tabs-wrapper {
+            gap: 0.45rem;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+        }
+    }
+
+    /* =========================================================
+   PORTFOLIO TITLE - LIGHT MODE
+   ========================================================= */
+
+    html[data-theme="light"] .section-main-title {
+        color: #8f0000;
+        text-shadow:
+            0 2px 8px rgba(180, 0, 0, 0.12),
+            0 0 20px rgba(180, 0, 0, 0.06);
+    }
+
+    /* Subtitle */
+    html[data-theme="light"] .section-subtitle {
+        color: #a00000;
+        text-shadow:
+            0 1px 5px rgba(180, 0, 0, 0.12);
+    }
+
+    /* Title box subtle enhancement */
+    html[data-theme="light"] .section-title-box {
+        position: relative;
+    }
+
+    html[data-theme="light"] .section-title-box::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 70%;
+        background: #000
+        border-radius: 10px;
+        opacity: 0.65;
+    }
+
+    html[dir="rtl"][data-theme="light"] .section-title-box::before {
+        left: auto;
+        right: 0;
+    }
+</style>

@@ -281,6 +281,19 @@
 
 <div class="crm-wrapper">
     
+    @if(session('success'))
+        <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #34d399; padding: 0.9rem 1.2rem; border-radius: 8px; margin-bottom: 1.5rem;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+        <h2 style="font-size:1.4rem; font-weight:800; color:#E4DCC7;">قاعدة بيانات وملفات العملاء الشاملة</h2>
+        <button onclick="document.getElementById('addClientModal').style.display = 'flex'" class="btn-submit-lux" style="display:flex; align-items:center; gap:8px;">
+            <span>+</span> إضافة عميل جديد
+        </button>
+    </div>
+
     <div class="stats-grid-crm">
         <div class="stat-card-crm">
             <div class="stat-title">إجمالي قاعدة بيانات العملاء</div>
@@ -365,9 +378,18 @@
                         <td>{{ $unitTypeMap[$client->unit_type] ?? 'غير محدد' }}</td>
                         <td style="color: #E4DCC7;">{{ $budgetMap[$client->budget] ?? 'قيد النقاش' }}</td>
                         <td>
-                            <button type="button" class="btn-action-view" onclick="openClientDrawer({{ json_encode($client) }}, {{ json_encode($client->activeSmartCard) }}, {{ json_encode($client->histories) }})">
-                                فتح الملف الشامل 👁
-                            </button>
+                            <div style="display:flex; gap:6px; align-items:center;">
+                                <button type="button" class="btn-action-view" onclick="openClientDrawer({{ json_encode($client) }}, {{ json_encode($client->activeSmartCard) }}, {{ json_encode($client->histories) }})">
+                                    فتح الملف الشامل 👁
+                                </button>
+                                <form method="POST" action="{{ route('admin.clients.destroy', $client) }}" style="display:inline;" onsubmit="return confirm('حذف هذا العميل نهائياً؟');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-action-view" style="color:#f87171; border-color:rgba(239,68,68,0.3); padding:0.4rem 0.6rem;" title="حذف">
+                                        ✕
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
@@ -542,4 +564,87 @@
         }
     }
 </script>
+
+{{-- مودال إضافة عميل جديد --}}
+<div id="addClientModal" class="crm-drawer-overlay" style="display:none; align-items:center; justify-content:center; padding:1.5rem;" onclick="if(event.target === this) this.style.display = 'none';">
+    <div style="background:#0d0d0f; border:1px solid rgba(228,220,199,0.15); border-radius:16px; width:100%; max-width:620px; padding:2rem; max-height:90vh; overflow-y:auto;" onclick="event.stopPropagation()">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(228,220,199,0.1);">
+            <h3 style="color:#E4DCC7; font-weight:700;">إضافة ملف عميل جديد إلى قاعدة البيانات</h3>
+            <button onclick="document.getElementById('addClientModal').style.display = 'none';" style="background:none; border:none; color:#76767A; font-size:1.5rem; cursor:pointer;">✕</button>
+        </div>
+
+        <form method="POST" action="{{ route('admin.clients.store') }}">
+            @csrf
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">اسم العميل بالكامل *</label>
+                    <input type="text" name="full_name" required placeholder="مثال: أحمد عبد الله" class="input-lux" style="width:100%;">
+                </div>
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">رقم الهاتف *</label>
+                    <input type="text" name="phone" required placeholder="01xxxxxxxxx" class="input-lux" style="width:100%;">
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">البريد الإلكتروني</label>
+                    <input type="email" name="email" placeholder="client@example.com" class="input-lux" style="width:100%;">
+                </div>
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">المحافظة / المدينة</label>
+                    <input type="text" name="governorate" placeholder="القاهرة، الجيزة..." class="input-lux" style="width:100%;">
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">الغرض العقاري</label>
+                    <select name="purpose" class="input-lux" style="width:100%;">
+                        @foreach($purposeMap as $k => $v)
+                            <option value="{{ $k }}">{{ $v }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">نوع الوحدة المفضلة</label>
+                    <select name="unit_type" class="input-lux" style="width:100%;">
+                        @foreach($unitTypeMap as $k => $v)
+                            <option value="{{ $k }}">{{ $v }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">الميزانية المرصودة</label>
+                    <select name="budget" class="input-lux" style="width:100%;">
+                        @foreach($budgetMap as $k => $v)
+                            <option value="{{ $k }}">{{ $v }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">الحالة الأولية للـ Lead</label>
+                    <select name="lead_status" class="input-lux" style="width:100%;">
+                        @foreach($statusMap as $k => $v)
+                            <option value="{{ $k }}">{{ $v }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-bottom:1.5rem;">
+                <label style="font-size:0.8rem; color:#76767A; display:block; margin-bottom:4px;">ملاحظات خاصة بملف العميل</label>
+                <textarea name="notes" rows="3" placeholder="تفاصيل متطلبات العميل الاستثمارية..." class="input-lux" style="width:100%;"></textarea>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" onclick="document.getElementById('addClientModal').style.display = 'none';" class="btn-action-view">إلغاء</button>
+                <button type="submit" class="btn-submit-lux">حفظ ملف العميل</button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

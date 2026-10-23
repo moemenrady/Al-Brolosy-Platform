@@ -2,13 +2,116 @@
 <html lang="ar" dir="rtl" data-theme="dark">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-en="Eng. Salah Al-Brolosy - CEO" data-ar="م. صلاح البرلسي - الرئيس التنفيذي">م. صلاح البرلسي - الرئيس التنفيذي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title data-en="Eng. Salah Al-Brolosy - CEO" data-ar="م. صلاح البرلسي - الرئيس التنفيذي">م. صلاح البرلسي - الرئيس
+        التنفيذي</title>
+    {{-- ========================================================= --}}
+    {{-- Primary SEO                                                --}}
+    {{-- ========================================================= --}}
+
+    <title>
+        م. صلاح البرلسي | الرئيس التنفيذي لشركة البرلسي للتطوير العقاري
+    </title>
+
+    <meta name="description"
+        content="تعرف على م. صلاح البرلسي، الشريك المؤسس والرئيس التنفيذي لشركة البرلسي للتطوير العقاري، واستكشف مسيرته المهنية وخبراته القيادية ورؤيته في تطوير مجتمعات عمرانية متكاملة.">
+
+    <meta name="keywords"
+        content="صلاح البرلسي, صلاح البرولسي, البرلسي, البرلسي للتطوير العقاري, شركة البرلسي, مطور عقاري, التطوير العقاري, عقارات مصر, الرئيس التنفيذي, المنصورة الجديدة, سانا تاورز">
+
+    <meta name="author" content="Al-Brolosy Real Estate Development">
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <meta name="theme-color" content="#000000">
+
+
+    {{-- ========================================================= --}}
+    {{-- Canonical                                                   --}}
+    {{-- ========================================================= --}}
+
+    <link rel="canonical" href="{{ url()->current() }}">
+
+
+    {{-- ========================================================= --}}
+    {{-- Company / Brand                                             --}}
+    {{-- ========================================================= --}}
+
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+    <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+    <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
+
+    <meta name="application-name" content="Al-Brolosy Real Estate Development">
+
+    <meta name="apple-mobile-web-app-title" content="Al-Brolosy">
+
+
+    {{-- ========================================================= --}}
+    {{-- Open Graph                                                  --}}
+    {{-- ========================================================= --}}
+
+    <meta property="og:type" content="profile">
+
+    <meta property="og:site_name" content="Al-Brolosy Real Estate Development">
+
+    <meta property="og:title" content="م. صلاح البرلسي | الرئيس التنفيذي لشركة البرلسي للتطوير العقاري">
+
+    <meta property="og:description"
+        content="تعرف على م. صلاح البرلسي، الشريك المؤسس والرئيس التنفيذي لشركة البرلسي للتطوير العقاري، واستكشف مسيرته المهنية وخبراته القيادية ورؤيته.">
+
+    <meta property="og:url" content="{{ url()->current() }}">
+
+    <meta property="og:locale" content="ar_EG">
+
+    <meta property="og:locale:alternate" content="en_US">
+
+    <meta property="og:image" content="{{ asset('images/founders/salah/1.png') }}">
+
+    <meta property="og:image:secure_url" content="{{ asset('images/founders/salah/1.png') }}">
+
+    <meta property="og:image:type" content="image/png">
+
+    <meta property="og:image:alt" content="م. صلاح البرلسي - الرئيس التنفيذي لشركة البرلسي للتطوير العقاري">
+
+    <meta property="og:image:width" content="1200">
+
+    <meta property="og:image:height" content="1500">
+
+    <meta property="profile:first_name" content="Salah">
+
+    <meta property="profile:last_name" content="Al-Brolosy">
+
+
+    {{-- ========================================================= --}}
+    {{-- Twitter / X                                                 --}}
+    {{-- ========================================================= --}}
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="م. صلاح البرلسي | الرئيس التنفيذي لشركة البرلسي للتطوير العقاري">
+
+    <meta name="twitter:description"
+        content="تعرف على م. صلاح البرلسي، الشريك المؤسس والرئيس التنفيذي لشركة البرلسي للتطوير العقاري.">
+
+    <meta name="twitter:image" content="{{ asset('images/founders/salah/1.png') }}">
+
+    <meta name="twitter:image:alt" content="م. صلاح البرلسي - الرئيس التنفيذي لشركة البرلسي للتطوير العقاري">
+
+
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         /* ===================================== */
@@ -16,37 +119,41 @@
         /* ===================================== */
         :root {
             --primary-red: #B40000;
+            --primary-red-glow: rgba(180, 0, 0, 0.35);
             --black: #000000;
             --light-gray: #76767A;
             --dark-gray: #696969;
             --warm-beige: #E4DCC7;
             --cream-beige: #E6E0D0;
             --off-white: #F0F0F0;
-            --transition-lux: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-lux: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         html[data-theme="dark"] {
-            --bg-main: #000000;
-            --bg-secondary: #0d0d0f;
-            --text-main: #F0F0F0;
-            --text-muted: #aaacb0;
-            --border-color: rgba(228, 220, 199, 0.15);
-            --card-glass: rgba(13, 13, 15, 0.85);
+            --bg-main: #050507;
+            --bg-secondary: #0a0a0d;
+            --text-main: #F4F4F6;
+            --text-muted: #9ba0a6;
+            --border-color: rgba(228, 220, 199, 0.12);
+            --card-glass: rgba(12, 12, 16, 0.9);
+            --header-bg: rgba(5, 5, 7, 0.85);
         }
 
         html[data-theme="light"] {
-            --bg-main: #F4F4F6;
+            --bg-main: #F2F2F5;
             --bg-secondary: #ffffff;
-            --text-main: #111111;
-            --text-muted: #555558;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --card-glass: rgba(255, 255, 255, 0.9);
+            --text-main: #111113;
+            --text-muted: #5e5e65;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --card-glass: rgba(255, 255, 255, 0.92);
+            --header-bg: rgba(242, 242, 245, 0.85);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html {
@@ -58,6 +165,7 @@
             color: var(--text-main);
             transition: background-color var(--transition-lux), color var(--transition-lux);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         html[dir="rtl"] {
@@ -65,35 +173,39 @@
         }
 
         html[dir="ltr"] {
-            font-family: 'Playfair Display', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Playfair Display', 'Cairo', Arial, sans-serif;
         }
 
         /* ===================================== */
-        /* 2. الهيدر واللوجو الفاخر              */
+        /* 2. الهيدر العصري (Mobile Optimized)  */
         /* ===================================== */
         .hero-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
-            position: absolute;
+            padding: 1rem 4%;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-lux);
         }
 
         .brand-logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
 
         .brand-logo-circle {
-            width: 50px;
-            height: 50px;
+            width: 42px;
+            height: 42px;
             border: 1px solid var(--warm-beige);
             border-radius: 50%;
             display: flex;
@@ -101,58 +213,62 @@
             justify-content: center;
             overflow: hidden;
             background: var(--black);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .brand-logo-circle img {
-            width: 80%;
-            height: 80%;
+            width: 75%;
+            height: 75%;
             object-fit: contain;
         }
 
         .brand-title {
             color: var(--warm-beige);
-            font-size: 1.5rem; /* تم تكبير النص */
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 8px;
         }
 
         .action-btn {
-            background: none;
+            background: var(--card-glass);
             border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.6rem 1.4rem;
-            color: var(--warm-beige);
+            border-radius: 30px;
+            padding: 0.5rem 0.9rem;
+            color: var(--text-main);
             cursor: pointer;
-            font-size: 1rem; /* تم تكبير النص */
+            font-size: 0.95rem;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             transition: var(--transition-lux);
+        }
+
+        .action-btn:active {
+            transform: scale(0.95);
         }
 
         .action-btn:hover {
             border-color: var(--primary-red);
-            background-color: rgba(180, 0, 0, 0.1);
-            transform: translateY(-2px);
+            background-color: var(--primary-red-glow);
         }
 
         .icon-svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--warm-beige);
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
             fill: none;
         }
 
         /* ===================================== */
-        /* 3. سيكشن الـ Hero وبطل الصفحة         */
+        /* 3. سيكشن البطل (Hero Section)        */
         /* ===================================== */
         .founder-hero {
             position: relative;
@@ -161,47 +277,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 9rem 5% 5rem;
-            overflow: hidden;
-        }
-
-        .bg-video-wrapper {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .bg-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.35;
-            transition: opacity 1.5s ease;
+            padding: 7rem 4% 3rem;
         }
 
         .cinematic-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, var(--bg-main) 5%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0.9) 100%);
+            background: radial-gradient(circle at center, rgba(180, 0, 0, 0.04) 0%, var(--bg-main) 80%);
             z-index: 2;
+            pointer-events: none;
         }
 
         .founder-container {
             position: relative;
             z-index: 10;
-            max-width: 1300px;
+            max-width: 1250px;
             width: 100%;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 4rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
         @media (min-width: 1024px) {
             .founder-container {
                 grid-template-columns: 1.1fr 0.9fr;
+                gap: 4rem;
             }
         }
 
@@ -213,54 +314,59 @@
 
         .tag-badge {
             align-self: flex-start;
-            background: rgba(180, 0, 0, 0.15);
+            background: rgba(180, 0, 0, 0.12);
             border: 1px solid var(--primary-red);
             color: var(--warm-beige);
-            padding: 0.5rem 1.4rem;
-            font-size: 1rem; /* تم تكبير النص */
+            padding: 0.4rem 1.1rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            border-radius: 4px;
-            margin-bottom: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 15px rgba(180, 0, 0, 0.15);
+            animation: slideDown 0.6s ease;
         }
 
         .founder-name {
-            font-size: 3rem; /* تم تكبير النص */
-            font-weight: 800;
+            font-size: 2.6rem;
+            font-weight: 900;
             color: var(--cream-beige);
-            line-height: 1.2;
-            margin-bottom: 0.8rem;
+            line-height: 1.15;
+            margin-bottom: 0.6rem;
+            animation: fadeIn 0.8s ease;
         }
 
         @media (min-width: 768px) {
             .founder-name {
-                font-size: 4rem; /* تم تكبير النص بشكل ملحوظ للشاشات الكبيرة */
+                font-size: 3.8rem;
             }
         }
 
         .founder-title {
-            font-size: 1.4rem; /* تم تكبير النص */
+            font-size: 1.25rem;
             color: var(--primary-red);
             font-weight: 700;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease;
         }
 
-        /* زر الفيسبوك */
+        /* زر الفيسبوك المطور */
         .social-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 0.8rem 1.8rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--off-white);
+            gap: 10px;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--card-glass);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1rem; /* تم تكبير النص */
+            border-radius: 12px;
+            font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             align-self: flex-start;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             transition: var(--transition-lux);
         }
 
@@ -268,34 +374,39 @@
             background-color: #1877F2;
             border-color: #1877F2;
             color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(24, 119, 242, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(24, 119, 242, 0.35);
         }
 
         .social-btn svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
         }
 
+        /* ===================================== */
+        /* 4. نظام التبويبات التفاعلية (Tabs)     */
+        /* ===================================== */
         .interactive-tabs-container {
             background: var(--card-glass);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2.5rem; /* توسعة المساحة الداخلية */
-            backdrop-filter: blur(15px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            transition: border-color var(--transition-lux), background-color var(--transition-lux);
+            border-radius: 16px;
+            padding: 1.8rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            transition: var(--transition-lux);
         }
 
         .tabs-header {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.2rem;
-            margin-bottom: 1.8rem;
+            padding-bottom: 0.9rem;
+            margin-bottom: 1.4rem;
             overflow-x: auto;
             scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
         .tabs-header::-webkit-scrollbar {
@@ -306,108 +417,125 @@
             background: none;
             border: none;
             color: var(--text-muted);
-            padding: 0.6rem 1.2rem;
-            font-size: 1.15rem; /* تم تكبير النص */
+            padding: 0.5rem 1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
             transition: var(--transition-lux);
             border-bottom: 2px solid transparent;
+            border-radius: 6px;
         }
 
         .tab-trigger.active {
             color: var(--primary-red);
             border-color: var(--primary-red);
+            background: rgba(180, 0, 0, 0.06);
         }
 
         .tab-content {
             display: none;
-            font-size: 1.15rem; /* تم تكبير النص */
-            line-height: 1.9; /* زيادة المسافة بين السطور لراحة العين */
+            font-size: 1.1rem;
+            line-height: 1.9;
             color: var(--text-main);
-            animation: fadeIn 0.5s ease forwards;
+            animation: tabFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        @keyframes fadeIn {
+        @keyframes tabFade {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(8px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* الجانب البصري للصور */
+        /* ===================================== */
+        /* 5. معرض الصور والسلايدر (Animations)   */
+        /* ===================================== */
         .founder-visuals {
             display: flex;
             flex-direction: column;
-            gap: 1.8rem;
+            gap: 1.2rem;
             align-items: center;
+            width: 100%;
         }
 
         .main-portrait-wrapper {
             position: relative;
             width: 100%;
-            max-width: 440px; /* تكبير بسيط للإطار */
+            max-width: 420px;
             aspect-ratio: 4 / 5;
             border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
-            background: #0d0d0f;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
+            background: var(--bg-secondary);
         }
 
         .main-portrait {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* تسريع تأثير الفيد لتجنب رؤية التقطيع */
-            transition: opacity 0.4s ease-in-out, transform 1.5s ease-out;
+            transition: opacity 0.35s ease-in-out, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .main-portrait-wrapper:hover .main-portrait {
             transform: scale(1.03);
         }
 
-        /* مصغرات الصور */
+        /* مصغرات الصور بتجربة لمس مذهلة */
         .thumbnail-gallery {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
             width: 100%;
-            max-width: 440px;
+            max-width: 420px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+
+        .thumbnail-gallery::-webkit-scrollbar {
+            display: none;
         }
 
         .thumbnail-item {
-            width: 75px;
-            height: 75px;
-            border-radius: 8px;
+            flex-shrink: 0;
+            width: 68px;
+            height: 68px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 2px solid transparent;
+            border: 2px solid var(--border-color);
             cursor: pointer;
             transition: var(--transition-lux);
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
         @media (min-width: 768px) {
             .thumbnail-item {
-                width: 85px;
-                height: 85px;
+                width: 75px;
+                height: 75px;
             }
+        }
+
+        .thumbnail-item:active {
+            transform: scale(0.92);
         }
 
         .thumbnail-item:hover,
         .thumbnail-item.active {
             border-color: var(--primary-red);
             opacity: 1;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(180, 0, 0, 0.2);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px var(--primary-red-glow);
         }
 
         .thumbnail-item img {
@@ -417,81 +545,86 @@
         }
 
         /* ===================================== */
-        /* 4. كروت الأرقام القياسية              */
+        /* 6. كروت الإحصائيات (Stats Grid)       */
         /* ===================================== */
         .stats-section {
-            padding: 5rem 5%;
+            padding: 4rem 4%;
             background-color: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            position: relative;
-            z-index: 20;
         }
 
         .stats-grid {
-            max-width: 1300px;
+            max-width: 1250px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
         }
 
         .stat-card {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
-            padding: 3rem 2.5rem;
-            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
             text-align: center;
             transition: var(--transition-lux);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .stat-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             border-color: var(--primary-red);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(180, 0, 0, 0.12);
         }
 
         .stat-number {
-            font-size: 3.5rem; /* تم تكبير النص */
-            font-weight: 800;
+            font-size: 3.2rem;
+            font-weight: 900;
             color: var(--primary-red);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
+            letter-spacing: -1px;
         }
 
         .stat-title {
-            font-size: 1.3rem; /* تم تكبير النص */
+            font-size: 1.25rem;
             color: var(--text-main);
-            font-weight: 700;
-            margin-bottom: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
         }
 
         .stat-desc {
-            font-size: 1.1rem; /* تم تكبير النص */
+            font-size: 1.05rem;
             color: var(--text-muted);
             line-height: 1.6;
         }
 
-        /* زر الإغلاق والرجوع */
+        /* زر العودة للرئيسية */
         .back-home-wrapper {
-            margin-top: 3rem;
+            margin-top: 2.5rem;
             display: flex;
         }
 
         .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             border: 1px solid var(--primary-red);
+            background: rgba(180, 0, 0, 0.05);
             color: var(--warm-beige);
-            padding: 1rem 3rem;
+            padding: 0.9rem 2.2rem;
             text-decoration: none;
-            font-size: 1.15rem; /* تم تكبير النص */
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 700;
             transition: var(--transition-lux);
-            border-radius: 4px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .back-home-btn:hover {
             background-color: var(--primary-red);
             color: #fff;
-            box-shadow: 0 10px 20px rgba(180, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(180, 0, 0, 0.3);
             transform: translateY(-2px);
         }
 
@@ -504,51 +637,129 @@
         }
 
         /* ===================================== */
-        /* 5. فوتر الصفحة                        */
+        /* 7. الفوتر الفاخر (Footer)            */
         /* ===================================== */
         .footer-lux {
-            padding: 3rem 5%;
+            padding: 3rem 4%;
             background-color: var(--black);
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
             color: var(--text-muted);
-            font-size: 1.1rem; /* تم تكبير النص */
+            font-size: 1.05rem;
         }
 
         .footer-logo {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             color: var(--warm-beige);
-            font-size: 1.6rem; /* تم تكبير النص */
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 800;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        /* التجاوب مع الجوال (Mobile Responsiveness) */
+        /* ===================================== */
+        /* التجاوب السوبر للجوال (Mobile Extra)  */
+        /* ===================================== */
         @media (max-width: 768px) {
-            .header-actions .action-btn span {
+            .hero-header {
+                padding: 0.8rem 4%;
+            }
+
+            .brand-title {
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+            }
+
+            .brand-logo-circle {
+                width: 36px;
+                height: 36px;
+            }
+
+            .action-btn {
+                padding: 0.45rem 0.75rem;
+                font-size: 0.85rem;
+            }
+
+            /* إخفاء نصوص الأزرار الهيدر العلوية للموبايل لتوفير مساحة فائقة ونظافة بصرية */
+            .action-btn span:not(.lang-en):not(.lang-ar):not(.lang-separator) {
                 display: none;
             }
 
             .founder-hero {
-                padding: 8rem 5% 4rem;
+                padding: 6rem 4% 2.5rem;
             }
 
-            .back-home-wrapper {
-                justify-content: center;
+            .founder-name {
+                font-size: 2.3rem;
+                text-align: center;
             }
 
-            .social-btn {
-                align-self: center;
+            .founder-title {
+                font-size: 1.1rem;
+                text-align: center;
             }
 
             .tag-badge {
                 align-self: center;
             }
 
-            .founder-name,
-            .founder-title {
-                text-align: center;
+            .social-btn {
+                align-self: center;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .interactive-tabs-container {
+                padding: 1.2rem;
+                border-radius: 12px;
+            }
+
+            .tab-trigger {
+                font-size: 0.95rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .tab-content {
+                font-size: 1.02rem;
+                line-height: 1.75;
+            }
+
+            .back-home-wrapper {
+                justify-content: center;
+            }
+
+            .back-home-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .main-portrait-wrapper {
+                max-width: 100%;
+                border-radius: 16px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -584,11 +795,6 @@
     </header>
 
     <section class="founder-hero">
-        <div class="bg-video-wrapper">
-            <video class="bg-video" autoplay loop muted playsinline>
-                <source src="videos/albrolosy-vid.mp4" type="video/mp4">
-            </video>
-        </div>
         <div class="cinematic-overlay"></div>
 
         <div class="founder-container">
@@ -596,7 +802,8 @@
             <div class="founder-info-block">
                 <span class="tag-badge" data-en="CO-FOUNDER & CEO" data-ar="الشريك المؤسس والرئيس التنفيذي">الشريك
                     المؤسس والرئيس التنفيذي</span>
-                <h1 class="founder-name" data-en="Eng. Salah Al-Brolosy" data-ar="م. صلاح البرلسي">م. صلاح البرلسي</h1>
+                <h1 class="founder-name" data-en="Eng. Salah Al-Brolosy" data-ar="م. صلاح البرلسي">م. صلاح البرلسي
+                </h1>
                 <div class="founder-title" data-en="CEO of Al-Brolosy Real Estate Development"
                     data-ar="الرئيس التنفيذي لشركة البرلسي للتطوير العقاري">الرئيس التنفيذي لشركة البرلسي للتطوير
                     العقاري</div>
@@ -659,9 +866,8 @@
 
             <div class="founder-visuals" id="gallery-container">
                 <div class="main-portrait-wrapper">
-                    <!-- تم التعديل هنا لدعم بيئة لارافيل بشكل صحيح من البداية ولتتطابق الصورة مع المصغرات -->
-                    <img id="main-active-img" src="{{ asset('images/founders/salah/1.png') }}" alt="Eng. Salah Al-Brolosy"
-                        class="main-portrait">
+                    <img id="main-active-img" src="{{ asset('images/founders/salah/1.png') }}"
+                        alt="Eng. Salah Al-Brolosy" class="main-portrait">
                 </div>
 
                 <div class="thumbnail-gallery">
@@ -745,14 +951,14 @@
         });
 
         // ==========================================
-        // نظام السلايدر المتطور لمعرض الصور (محدث)
+        // نظام السلايدر المتطور لمعرض الصور والأنيميشن
         // ==========================================
         let currentImgIndex = 1;
         const totalImages = 5;
         const basePath = "{{ asset('images/founders/salah') }}/";
         let slideInterval;
 
-        // 1. تقنية التحميل المسبق (Preloading) لجميع الصور حتى لا تتأخر أثناء العرض
+        // التحميل المسبق للصور لضمان سرعة فائقة وعدم حدوث أي تأخير على الموبايل
         const preloadedImages = [];
         for (let i = 1; i <= totalImages; i++) {
             const img = new Image();
@@ -763,16 +969,15 @@
         function switchPortrait(index) {
             const mainImg = document.getElementById('main-active-img');
 
-            // إعطاء تأثير شفافية سريع قبل تغيير المصدر
-            mainImg.style.opacity = '0.4';
+            mainImg.style.opacity = '0.3';
+            mainImg.style.transform = 'scale(0.98)';
 
             setTimeout(() => {
-                // الصور محملة مسبقاً، لذا ستظهر فوراً ولن يظهر نص الـ alt
                 mainImg.src = `${basePath}${index}.png`;
                 mainImg.style.opacity = '1';
-            }, 150);
+                mainImg.style.transform = 'scale(1)';
+            }, 180);
 
-            // تحديث حالة المصغرات النشطة
             document.querySelectorAll('.thumbnail-item').forEach(item => {
                 item.classList.remove('active');
             });
@@ -781,7 +986,6 @@
             currentImgIndex = index;
         }
 
-        // دالة التغيير التلقائي للصور
         function autoSlide() {
             let nextIndex = currentImgIndex + 1;
             if (nextIndex > totalImages) {
@@ -790,32 +994,60 @@
             switchPortrait(nextIndex);
         }
 
-        // بدء السلايدر ليتغير كل 4 ثواني
         function startSlider() {
-            slideInterval = setInterval(autoSlide, 4000);
+            slideInterval = setInterval(autoSlide, 4500);
         }
 
-        // إيقاف السلايدر
         function stopSlider() {
             clearInterval(slideInterval);
         }
 
-        // في حال ضغط المستخدم على مصغر بنفسه
         function manualSwitch(index) {
-            if(index === currentImgIndex) return; // منع إعادة تحميل نفس الصورة إذا تم الضغط عليها مرتين
-            stopSlider(); // نوقف التلقائي لحظياً
+            if (index === currentImgIndex) return;
+            stopSlider();
             switchPortrait(index);
-            startSlider(); // نعيد تشغيله من جديد
+            startSlider();
         }
 
-        // بدء السلايدر عند تحميل الصفحة
         startSlider();
 
-        // إيقاف التغيير التلقائي عند وقوف الماوس على الصور ليتيح للمستخدم التركيز
         const galleryContainer = document.getElementById('gallery-container');
         galleryContainer.addEventListener('mouseenter', stopSlider);
         galleryContainer.addEventListener('mouseleave', startSlider);
+
+        // دعم اللمس للسلايدر على الموبايل بسلاسة
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        galleryContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopSlider();
+        }, {
+            passive: true
+        });
+
+        galleryContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startSlider();
+        }, {
+            passive: true
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 40) {
+                // سحب لليسار (التالي)
+                let next = currentImgIndex + 1;
+                if (next > totalImages) next = 1;
+                switchPortrait(next);
+            }
+            if (touchEndX > touchStartX + 40) {
+                // سحب لليمين (السابق)
+                let prev = currentImgIndex - 1;
+                if (prev < 1) prev = totalImages;
+                switchPortrait(prev);
+            }
+        }
     </script>
 </body>
-
 </html>

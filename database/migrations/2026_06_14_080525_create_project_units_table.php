@@ -10,31 +10,38 @@ return new class extends Migration {
    */
   public function up(): void
   {
-    Schema::create('project_units', function (Blueprint $table) {
+   Schema::create('project_units', function (Blueprint $table) {
+    $table->id();
 
-      $table->id();
-
-      $table->foreignId('project_id')
+    $table->foreignId('project_id')
         ->constrained()
         ->cascadeOnDelete();
 
-      // =========================
-      // UNIT INFO
-      // =========================
-      $table->string('unit_type'); // Residential / Commercial / Admin
+    $table->foreignId('project_unit_type_id')
+        ->constrained()
+        ->cascadeOnDelete();
 
-      $table->string('floor')->nullable(); // Ground / First / etc
+    $table->string('unit_number');
 
-      $table->string('start_area')->nullable(); // ranges
+    $table->decimal('area', 10, 2)->nullable();
 
-      $table->string('price_per_meter')->nullable();
+    $table->decimal('price_per_meter', 15, 2)->nullable();
 
-      $table->string('unit_price')->nullable();
+    $table->decimal('unit_price', 15, 2)->nullable();
 
-      $table->string('finishing_type')->nullable(); // semi / core / full
+    $table->enum('status', [
+        'available',
+        'reserved',
+        'sold',
+    ])->default('available');
 
-      $table->timestamps();
-    });
+    $table->timestamps();
+
+    $table->unique([
+        'project_id',
+        'unit_number'
+    ]);
+});
   }
   /**
    * Reverse the migrations.

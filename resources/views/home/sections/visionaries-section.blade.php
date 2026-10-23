@@ -95,7 +95,7 @@
     <!-- خلفية الفيديو مع الدارك فيلتر الفخم -->
     <div class="video-bg-wrapper">
         <video autoplay loop muted playsinline class="legacy-video">
-            <source src="{{ asset('videos/albrolosy-vid.mp4') }}" type="video/mp4">
+            <source src="{{ asset('videos/d_hero3.mp4') }}" type="video/mp4">
         </video>
         <div class="video-dark-filter"></div>
     </div>

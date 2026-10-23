@@ -128,11 +128,19 @@ class IdentifyUser
         $response = $next($request);
 
         if (!$request->hasCookie('guest_id')) {
-            $response->cookie(
-                'guest_id',
-                $guestId,
-                60 * 24 * 365 * 5
-            );
+            if (method_exists($response, 'cookie')) {
+                $response->cookie(
+                    'guest_id',
+                    $guestId,
+                    60 * 24 * 365 * 5
+                );
+            } else {
+                $response->headers->setCookie(cookie(
+                    'guest_id',
+                    $guestId,
+                    60 * 24 * 365 * 5
+                ));
+            }
         }
 
         return $response;

@@ -11,7 +11,7 @@ class ProjectSearchService
 
             ->with([
                 'sector',
-                'units',
+                'unitTypes',
                 'paymentPlans',
                 'features',
                 'tags'
@@ -38,7 +38,7 @@ class ProjectSearchService
             ->when(
                 $filters['unit_type'] ?? null,
                 fn($q) => $q->whereHas(
-                    'units',
+                    'unitTypes',
                     fn($u) =>
                     $u->where(
                         'unit_type',
@@ -50,10 +50,10 @@ class ProjectSearchService
             ->when(
                 $filters['area_from'] ?? null,
                 fn($q) => $q->whereHas(
-                    'units',
+                    'unitTypes',
                     fn($u) =>
                     $u->where(
-                        'start_area',
+                        'area',
                         '>=',
                         $filters['area_from']
                     )
@@ -93,7 +93,7 @@ class ProjectSearchService
                 )
 
                 ->orWhereHas(
-                    'units',
+                    'unitTypes',
                     fn($u) =>
                     $u->where('unit_type', 'like', "%{$keyword}%")
                         ->orWhere('finishing_type', 'like', "%{$keyword}%")

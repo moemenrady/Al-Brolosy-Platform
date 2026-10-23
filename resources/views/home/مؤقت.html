@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البرلسي للتطوير العقاري | تحديث المنصة</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        /* ===================================== */
+        /* 1. إعدادات المتغيرات والثيمات         */
+        /* ===================================== */
+        :root {
+            /* ألوانك الأصلية */
+            --primary-red: #B40000;
+            --black: #000000;
+            --light-gray: #76767A;
+            --dark-gray: #696969;
+            --warm-beige: #E4DCC7;
+            --cream-beige: #E6E0D0;
+            --off-white: #F0F0F0;
+
+            /* متغيرات إضافية لضمان عمل الكود الخاص بك بكفاءة */
+            --bg-main: #0a0a0a;
+            /* خلفية داكنة فاخرة */
+            --text-main: #F0F0F0;
+            --text-muted: #a0a0a5;
+            --border-color: rgba(228, 220, 199, 0.15);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ================================================= */
+        /* تنسيقات سيكشن المشروع الفاخر (Focused Project)      */
+        /* ================================================= */
+        .focused-project-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding: 8rem 5% 6rem 5%;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* خلفية الفيديو الفاخرة المدمجة */
+        .project-video-bg-wrapper {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            /* أضفت صورة مؤقتة فخمة لحين وضعك للفيديو */
+            background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop') center/cover no-repeat;
+        }
+
+        .project-video-bg-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            /* تقليل الشفافية لبروز النصوص */
+        }
+
+        /* طبقة تعتيم وتدرج لوني سينمائي */
+        .project-video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.6) 50%, rgba(10, 10, 10, 0.95) 100%),
+                linear-gradient(to right, rgba(180, 0, 0, 0.1) 0%, transparent 100%);
+            z-index: 2;
+        }
+
+        /* حاوية المحتوى الرئيسية */
+        .project-luxury-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* الهيدر الفخم المضيء للمشروع */
+        .project-glamour-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2.5rem;
+            margin-bottom: 3.5rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .project-badge-premium {
+            color: var(--primary-red);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .project-huge-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--cream-beige);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        /* إعدادات الموقع الجغرافي */
+        .project-geo-location {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .geo-coords {
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(180, 0, 0, 0.1);
+            color: var(--primary-red);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        html[dir="rtl"] .geo-coords {
+            margin-left: 0;
+            margin-right: 0.5rem;
+        }
+
+        /* ختم الشعار البرولسي الفخم والوهج الدائري خلفه */
+        .project-brand-stamp {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stamp-img {
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stamp-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .stamp-glow {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: var(--primary-red);
+            opacity: 0.3;
+            filter: blur(25px);
+            border-radius: 50%;
+            z-index: 1;
+            animation: pulse 1s infinite alternate;
+        }
+
+        /* تصميم الجريد الرئيسي */
+        .project-main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        @media (min-width: 1024px) {
+            .project-main-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+        }
+
+        /* عمود السرد والوصف */
+        .project-description-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* كروت المؤشرات السريعة الفاخرة */
+        .project-quick-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 1.2rem;
+            border-radius: 6px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-red);
+        }
+
+        .metric-card small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card strong {
+            font-size: 1.2rem;
+            color: var(--warm-beige);
+            font-weight: 500;
+        }
+
+        .text-highlight {
+            color: var(--primary-red) !important;
+            font-weight: bold !important;
+        }
+
+        /* عمود التبويبات التفاعلي الزجاجي */
+        .project-interactive-specs-panel {
+            background: rgba(20, 20, 22, 0.6);
+            border: 1px solid rgba(228, 220, 199, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 12px;
+            padding: 2.2rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInRight 1s ease-out 0.7s both;
+        }
+
+        /* التبويبات الفاخرة */
+        .specs-tabs-header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .spec-tab-trigger {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            padding: 0.6rem 0.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .spec-tab-trigger.active {
+            color: var(--primary-red);
+            position: relative;
+            font-weight: bold;
+        }
+
+        .spec-tab-trigger.active::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+
+        /* خطوط تفاصيل الوحدات */
+        .tab-pane-luxury {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spec-feature-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .border-none {
+            border-bottom: none !important;
+        }
+
+        .spec-feature-line span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .spec-feature-line strong {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* أزرار الإجراءات داخل اللوحة */
+        .specs-panel-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .specs-panel-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .btn-luxury-primary,
+        .btn-luxury-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .btn-luxury-primary {
+            background: var(--primary-red);
+            color: #ffffff;
+            border: 1px solid var(--primary-red);
+        }
+
+        .btn-luxury-primary:hover {
+            background: #900000;
+            border-color: #900000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(180, 0, 0, 0.3);
+        }
+
+        .btn-luxury-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-luxury-secondary:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        /* حركة تباين الأنيميشن الناعم لـ Alpine JS */
+        @keyframes pane-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pane-fade-in {
+            animation: pane-fade-in 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+        }
+
+        /* ================================================= */
+        /* الموبايل والـ Responsiveness وإصلاح الـ Layouts    */
+        /* ================================================= */
+        @media (max-width: 1023px) {
+            .focused-project-section {
+                padding-top: 6rem;
+            }
+
+            .project-glamour-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+
+            .project-brand-stamp {
+                align-self: flex-start;
+            }
+
+            .project-huge-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .project-huge-title {
+                font-size: 2.2rem;
+            }
+
+            .specs-tabs-header {
+                grid-template-columns: 1fr;
+                gap: 0.2rem;
+            }
+
+            .spec-tab-trigger.active::after {
+                display: none;
+            }
+
+            .spec-tab-trigger {
+                text-align: start;
+                padding: 0.8rem 1rem;
+                border-radius: 4px;
+            }
+
+            .spec-tab-trigger.active {
+                background: rgba(180, 0, 0, 0.08);
+                padding-right: 1.2rem;
+            }
+
+            .spec-feature-line {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+
+            .spec-feature-line strong {
+                align-self: flex-end;
+                color: var(--warm-beige);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="focused-project-section" x-data="{ activeTab: 'status' }">
+
+        <div class="project-video-bg-wrapper">
+            <div class="project-video-overlay"></div>
+        </div>
+
+        <div class="project-luxury-container">
+
+            <div class="project-glamour-header">
+                <div>
+                    <span class="project-badge-premium">ترقبوا الانطلاق الكبير</span>
+                    <h1 class="project-huge-title">الفخامة تُعاد <br> <span class="text-highlight">إلي</span></h1>
+                    <div class="project-geo-location">
+                        <span>نحن ننتقل بتجربتك العقارية إلى بُعد آخر كلياً.</span>
+                        <span class="geo-coords">V 2.0</span>
+                    </div>
+                </div>
+
+                <div class="project-brand-stamp">
+                    <div class="stamp-glow"></div>
+                    <div class="stamp-img">
+                        <img src="albrolosy_logo.png" alt="Albrolosy Logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-main-grid">
+
+                <div>
+                    <p class="project-description-text">
+                        منصة <strong>البرلسي للتطوير العقاري</strong> تخضع حالياً لتطوير شامل. نحن لا نقوم فقط بتحديث
+                        واجهتنا، بل نبني بيئة رقمية متكاملة تضمن لك تصفحاً أسرع، أماناً أعلى، واستعراضاً فائق الدقة
+                        لأرقى المشاريع العقارية.
+                    </p>
+
+                    <div class="project-quick-metrics">
+                        <div class="metric-card">
+                            <small>حالة المنصة</small>
+                            <strong>تحت التطوير ⚙️</strong>
+                        </div>
+                        <div class="metric-card">
+                            <small>المعيار الجديد</small>
+                            <strong>أفضل خدمة <span class="text-highlight">مضمونة</span></strong>
+                        </div>
+                        <div class="metric-card">
+                            <small>موعد الإطلاق</small>
+                            <strong>قريباً جداً ⏳</strong>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

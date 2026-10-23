@@ -691,7 +691,7 @@
                             <td>
                                 <div class="action-group">
                                     <button type="button" class="btn-icon" title="Edit Project"
-                                        onclick='populateEditForm(@js($project->load(['units', 'paymentPlans', 'features', 'images'])))'>
+                                        onclick='populateEditForm(@js($project->load(["unitTypes", "paymentPlans", "features", "images"])))'>
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
 
@@ -824,8 +824,8 @@
             }
 
             // بناء صفوف الوحدات المخزنة قادمة من الباك إند
-            if (project.units && project.units.length > 0) {
-                project.units.forEach(unit => addUnitRow(unit));
+            if (project.unit_types && project.unit_types.length > 0) {
+                project.unit_types.forEach(unit => addUnitRow(unit));
             }
             // بناء صفوف خطط السداد المخزنة
             if (project.payment_plans && project.payment_plans.length > 0) {

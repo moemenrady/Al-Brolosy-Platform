@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
    Schema::create('clients', function (Blueprint $table) {
-
     $table->id();
-
     /*
     |--------------------------------------------------------------------------
     | Basic Information
@@ -31,7 +29,7 @@ return new class extends Migration
     $table->string('photo')->nullable();
 
     // المحافظة (إجباري)
-    $table->string('governorate');
+    $table->string('governorate')->nullable();
 
     // المدينة
     $table->string('city')->nullable();

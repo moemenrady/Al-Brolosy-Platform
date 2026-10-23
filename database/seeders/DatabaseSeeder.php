@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
             SectorSeeder::class,
             ProjectFullSeeder::class,
             MediaCenterSeeder::class,
-            JobSeeder::class
+            JobSeeder::class,
+            SmartCardSeeder::class,
+            AdminAndCrmSeeder::class,
+            ConciergeStepSeeder::class,
         ]);
     }
 }

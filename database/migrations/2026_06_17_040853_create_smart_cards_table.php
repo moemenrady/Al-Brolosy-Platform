@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamp('blocked_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
             $table->text('status_note')->nullable();
-            $table->foreignId('client_id')
+            $table->foreignId('client_id')->nullable()
                 ->constrained()
                 ->cascadeOnDelete();
             $table->timestamps();

@@ -3,7 +3,7 @@
 namespace App\Services\Search\Searchers;
 
 use App\DTO\SearchResult;
-use App\Models\ProjectUnit;
+use App\Models\ProjectUnitType;
 use Illuminate\Support\Arr;
 
 final class UnitSearcher implements SearcherInterface
@@ -12,7 +12,7 @@ final class UnitSearcher implements SearcherInterface
     {
         $keyword = Arr::get($filters, 'keyword');
 
-        $query = ProjectUnit::query();
+        $query = ProjectUnitType::query();
 
         if ($keyword) {
             $kw = "%{$keyword}%";
@@ -20,7 +20,7 @@ final class UnitSearcher implements SearcherInterface
                 $q->where('unit_type', 'like', $kw)
                     ->orWhere('finishing_type', 'like', $kw)
                     ->orWhere('floor', 'like', $kw)
-                    ->orWhere('start_area', 'like', $kw)
+                    ->orWhere('area', 'like', $kw)
                     ->orWhere('unit_price', 'like', $kw)
                     ->orWhere('price_per_meter', 'like', $kw);
             });
@@ -31,7 +31,7 @@ final class UnitSearcher implements SearcherInterface
         }
 
         if (isset($filters['area'])) {
-            $query->where('start_area', '<=', $filters['area']);
+            $query->where('area', '<=', $filters['area']);
         }
 
         if (isset($filters['budget'])) {
@@ -42,7 +42,7 @@ final class UnitSearcher implements SearcherInterface
 
         $results = [];
         foreach ($list as $u) {
-            $title = $u->unit_type ?: ('Unit ' . $u->id);
+            $title = $u->unit_type ?: ('Unit Type ' . $u->id);
             $subtitle = $u->project?->name_en ?? $u->project?->name_ar ?? null;
             $score = 85;
             $results[] = new SearchResult(

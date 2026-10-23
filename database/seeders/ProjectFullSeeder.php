@@ -4,11 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\Project;
 use App\Models\ProjectUnit;
+use App\Models\ProjectUnitType;
 use App\Models\ProjectPaymentPlan;
 use App\Models\ProjectFeature;
 use App\Models\ProjectImage;
 use App\Models\Sector;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ProjectFullSeeder extends Seeder
@@ -16,20 +18,22 @@ class ProjectFullSeeder extends Seeder
     public function run(): void
     {
         /*
-        |-----------------------------------------
-        | GET SECTORS BY SLUG (IMPORTANT FIX)
-        |-----------------------------------------
+        |--------------------------------------------------------------------------
+        | GET SECTORS BY SLUG
+        |--------------------------------------------------------------------------
         */
+
         $sector = fn($slug) => Sector::where('slug', $slug)->first();
 
         /*
-        |-----------------------------------------
+        |--------------------------------------------------------------------------
         | PROJECTS DATA
-        |-----------------------------------------
+        |--------------------------------------------------------------------------
         */
 
         $projects = [
-              [
+
+            [
                 'name_ar' => 'سانا تاور',
                 'name_en' => 'SANA TOWER',
                 'sector_slug' => 'residential',
@@ -39,48 +43,73 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'المنصورة الجديدة',
                 'location_en' => 'New Mansoura',
+
                 'latitude' => '31.435250',
                 'longitude' => '31.653600',
+
                 'price_budget' => '2,450,000 - 18,000,000',
+
                 'status' => 'under_construction',
                 'delivery_time' => '3.5 years',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'وحدات سكنية',
+                        'name_en' => 'Residential Units',
+
                         'unit_type' => 'Residential',
                         'floor' => 'F/S/TH/FO',
-                        'start_area' => '59M - 183M',
-                        'price_per_meter' => '45,000 - 70,000',
-                        'unit_price' => '2,650,000 to 12,850,000',
+
+                        'area' => 120,
+
+                        'price_per_meter' => 55000,
+                        'unit_price' => 6600000,
+
                         'finishing_type' => 'semi finishing',
                     ],
+
                     [
+                        'name_ar' => 'وحدات تجارية',
+                        'name_en' => 'Commercial Units',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Ground/First',
-                        'start_area' => '25M - 500M',
-                        'price_per_meter' => '120,000 - 250,000',
-                        'unit_price' => '3,000,000 to 18,000,000',
+
+                        'area' => 100,
+
+                        'price_per_meter' => 180000,
+                        'unit_price' => 18000000,
+
                         'finishing_type' => 'core and shell',
                     ],
+
                     [
+                        'name_ar' => 'وحدات فندقية',
+                        'name_en' => 'Hotel Units',
+
                         'unit_type' => 'Hotel Units',
                         'floor' => 'F/S/TH/FO',
-                        'start_area' => '45M - 60M',
-                        'price_per_meter' => '54,000 - 70,000',
-                        'unit_price' => '2,450,000 to 3,500,000',
+
+                        'area' => 50,
+
+                        'price_per_meter' => 60000,
+                        'unit_price' => 3000000,
+
                         'finishing_type' => 'fully finished',
-                    ]
+                    ],
+
                 ],
 
                 'payment' => [
                     'down_payment' => '5% / 10% / 15% / 25%',
                     'installment_years' => '5 / 6 / 7 / 8 years',
                     'maintenance' => '10%',
-                    'notes' => null
+                    'notes' => null,
                 ],
 
                 'features' => [],
-                'images_count' => 6
+                'images_count' => 6,
             ],
 
             [
@@ -93,41 +122,58 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'دمياط الجديدة',
                 'location_en' => 'New Damietta',
+
                 'latitude' => '31.430800',
                 'longitude' => '31.667370',
+
                 'price_budget' => '3,700,000 - 5,928,000',
+
                 'status' => 'under_construction',
                 'delivery_time' => '3 years',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'وحدات سكنية',
+                        'name_en' => 'Residential Units',
+
                         'unit_type' => 'Residential',
                         'floor' => 'Ground',
-                        'start_area' => '127-138-142-149-150-154-156-160',
-                        'price_per_meter' => '34,000 to 42,500',
-                        'unit_price' => '3,700,000 to 5,928,000',
+
+                        'area' => 150,
+
+                        'price_per_meter' => 40000,
+                        'unit_price' => 4500000,
+
                         'finishing_type' => 'semi finishing',
                     ],
+
                     [
+                        'name_ar' => 'وحدات تجارية',
+                        'name_en' => 'Commercial Units',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Typical',
-                        'start_area' => '18 to 94',
-                        'price_per_meter' => null,
-                        'unit_price' => null,
+
+                        'area' => 50,
+
+                        'price_per_meter' => 100000,
+                        'unit_price' => 5000000,
+
                         'finishing_type' => 'core and shell',
-                    ]
+                    ],
+
                 ],
 
                 'payment' => [
                     'down_payment' => '8%',
                     'installment_years' => '3 years',
                     'maintenance' => null,
-                    'notes' => 'under construction'
+                    'notes' => 'under construction',
                 ],
 
                 'features' => [],
-                'images_count' => 45
-
+                'images_count' => 45,
             ],
 
             [
@@ -140,32 +186,43 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'دمياط الجديدة',
                 'location_en' => 'New Damietta',
+
                 'latitude' => '31.435250',
                 'longitude' => '31.653600',
+
                 'price_budget' => '4,224,000 - 19,264,000',
+
                 'status' => 'under_construction',
                 'delivery_time' => '3 years',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'وحدات إدارية',
+                        'name_en' => 'Administrative Units',
+
                         'unit_type' => 'Administrative',
                         'floor' => 'Second',
-                        'start_area' => '160-174-184',
-                        'price_per_meter' => '60,000 to 75,000',
-                        'unit_price' => '3,800,000 to 6,240,000',
+
+                        'area' => 170,
+
+                        'price_per_meter' => 68000,
+                        'unit_price' => 5500000,
+
                         'finishing_type' => 'semi finishing',
-                    ]
+                    ],
+
                 ],
 
                 'payment' => [
                     'down_payment' => '20%',
                     'installment_years' => '5 years',
                     'maintenance' => '10%',
-                    'notes' => null
+                    'notes' => null,
                 ],
 
                 'features' => [],
-                'images_count' => 34
+                'images_count' => 34,
             ],
 
             [
@@ -178,34 +235,45 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'دمياط',
                 'location_en' => 'Damietta',
+
                 'latitude' => '31.425704',
                 'longitude' => '31.660579',
 
                 'price_budget' => '2,700,000 - 15,040,000',
+
                 'status' => 'under_construction',
                 'delivery_time' => '1 year',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'وحدات تجارية',
+                        'name_en' => 'Commercial Units',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Ground',
-                        'start_area' => '33-40-54-122',
-                        'price_per_meter' => '140,000 to 240,000',
-                        'unit_price' => '2,700,000 to 15,040,000',
+
+                        'area' => 54,
+
+                        'price_per_meter' => 190000,
+                        'unit_price' => 10260000,
+
                         'finishing_type' => 'core and shell',
-                    ]
+                    ],
+
                 ],
 
                 'payment' => [
                     'down_payment' => '25%',
                     'installment_years' => '3 years',
                     'maintenance' => '5%',
-                    'notes' => null
+                    'notes' => null,
                 ],
 
                 'features' => [],
-                'images_count' => 0
+                'images_count' => 0,
             ],
+
             [
                 'name_ar' => 'ويست مول',
                 'name_en' => 'WEST',
@@ -216,95 +284,62 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'دمياط الجديدة',
                 'location_en' => 'New Damietta',
+
                 'latitude' => null,
                 'longitude' => null,
+
                 'price_budget' => '859,100 - 9,740,000',
+
                 'status' => 'under_construction',
                 'delivery_time' => '1 year',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'محلات تجارية - أرضي',
+                        'name_en' => 'Commercial Units - Ground',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Ground',
-                        'start_area' => '20.4 - 27.5 - 32.25 - 48.7',
-                        'price_per_meter' => '200,000 to 250,000',
-                        'unit_price' => '4,160,000 to 9,740,000',
+
+                        'area' => 32.25,
+
+                        'price_per_meter' => 225000,
+                        'unit_price' => 7256250,
+
                         'finishing_type' => 'semi finishing',
                     ],
 
                     [
+                        'name_ar' => 'محلات تجارية - ميزانين',
+                        'name_en' => 'Commercial Units - Mezzanine',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Mezzanine',
-                        'start_area' => '12.43 - 14.97 - 17.5 - 24.75',
-                        'price_per_meter' => '90,000 to 130,000',
-                        'unit_price' => '859,100 to 3,211,000',
+
+                        'area' => 17.5,
+
+                        'price_per_meter' => 110000,
+                        'unit_price' => 1925000,
+
                         'finishing_type' => 'semi finishing',
                     ],
 
                     [
+                        'name_ar' => 'وحدات إدارية',
+                        'name_en' => 'Administrative Units',
+
                         'unit_type' => 'Administrative',
                         'floor' => 'First - Second',
-                        'start_area' => '28.13 - 32.62 - 36.0',
-                        'price_per_meter' => '50,000 to 65,000',
-                        'unit_price' => '1,481,000 to 3,142,800',
-                        'finishing_type' => 'semi finishing',
-                    ]
-                ],
 
-                'payment' => [
-                    'down_payment' => '40%',
-                    'installment_years' => '1.5 years',
-                    'maintenance' => '5%',
-                    'notes' => null
-                ],
+                        'area' => 32.62,
 
-                'features' => [],
+                        'price_per_meter' => 57500,
+                        'unit_price' => 1875650,
 
-                'images_count' => 13
-            ],
-            [
-                'name_ar' => 'لاينز مول',
-                'name_en' => 'LINES',
-                'sector_slug' => 'commercial',
-
-                'description_ar' => 'أكبر مول تجاري في الجامعة على مساحة 1700 م² يتكون من 6 قطع ضم، بواجهة على الطريق الأوسطي 25م وواجهة على جامعة دمياط مباشرة بعمق 85م وناصية على مدخل متشابك 10م، يتكون من أراضي وميزانين تجاري وأول وثاني إداري وثالث سكني.',
-                'description_en' => 'The largest commercial mall at the university on an area of 1700 sqm with direct frontage on Damietta University and the middle road, featuring commercial and administrative units.',
-
-                'location_ar' => 'دمياط الجديدة',
-                'location_en' => 'New Damietta',
-                'latitude' => '31.428580',
-                'longitude' => '31.650350',
-                'price_budget' => '1,553,800 - 8,622,250',
-                'status' => 'under_construction',
-                'delivery_time' => '1 year',
-
-                'units' => [
-                    [
-                        'unit_type' => 'Commercial',
-                        'floor' => 'Ground',
-                        'start_area' => '49.27',
-                        'price_per_meter' => '175,000',
-                        'unit_price' => '8,622,250',
-                        'finishing_type' => 'core and shell',
-                    ],
-
-                    [
-                        'unit_type' => 'Commercial',
-                        'floor' => 'Mezzanine',
-                        'start_area' => '18.3 - 22.68 - 28.8 - 34.93 - 39.91',
-                        'price_per_meter' => '85,000 to 95,000',
-                        'unit_price' => '1,553,800 to 3,791,450',
-                        'finishing_type' => 'core and shell',
-                    ],
-
-                    [
-                        'unit_type' => 'Administrative',
-                        'floor' => 'First - Second',
-                        'start_area' => '43.37 - 44.06 - 50.76',
-                        'price_per_meter' => '50,000 to 55,000',
-                        'unit_price' => '2,168,500',
                         'finishing_type' => 'semi finishing',
                     ],
+
                 ],
 
                 'payment' => [
@@ -315,9 +350,88 @@ class ProjectFullSeeder extends Seeder
                 ],
 
                 'features' => [],
+                'images_count' => 13,
+            ],
 
+            [
+                'name_ar' => 'لاينز مول',
+                'name_en' => 'LINES',
+                'sector_slug' => 'commercial',
+
+                'description_ar' => 'أكبر مول تجاري في الجامعة على مساحة 1700 م² يتكون من 6 قطع ضم، بواجهة على الطريق الأوسطي 25م وواجهة على جامعة دمياط مباشرة بعمق 85م وناصية على مدخل متشابك 10م، يتكون من أراضي وميزانين تجاري وأول وثاني إداري وثالث سكني.',
+                'description_en' => 'The largest commercial mall at the university on an area of 1700 sqm with direct frontage on Damietta University and the middle road, featuring commercial and administrative units.',
+
+                'location_ar' => 'دمياط الجديدة',
+                'location_en' => 'New Damietta',
+
+                'latitude' => '31.428580',
+                'longitude' => '31.650350',
+
+                'price_budget' => '1,553,800 - 8,622,250',
+
+                'status' => 'under_construction',
+                'delivery_time' => '1 year',
+
+                'units' => [
+
+                    [
+                        'name_ar' => 'وحدات تجارية - أرضي',
+                        'name_en' => 'Commercial Units - Ground',
+
+                        'unit_type' => 'Commercial',
+                        'floor' => 'Ground',
+
+                        'area' => 49.27,
+
+                        'price_per_meter' => 175000,
+                        'unit_price' => 8622250,
+
+                        'finishing_type' => 'core and shell',
+                    ],
+
+                    [
+                        'name_ar' => 'وحدات تجارية - ميزانين',
+                        'name_en' => 'Commercial Units - Mezzanine',
+
+                        'unit_type' => 'Commercial',
+                        'floor' => 'Mezzanine',
+
+                        'area' => 28.8,
+
+                        'price_per_meter' => 90000,
+                        'unit_price' => 2592000,
+
+                        'finishing_type' => 'core and shell',
+                    ],
+
+                    [
+                        'name_ar' => 'وحدات إدارية',
+                        'name_en' => 'Administrative Units',
+
+                        'unit_type' => 'Administrative',
+                        'floor' => 'First - Second',
+
+                        'area' => 50.76,
+
+                        'price_per_meter' => 52500,
+                        'unit_price' => 2664900,
+
+                        'finishing_type' => 'semi finishing',
+                    ],
+
+                ],
+
+                'payment' => [
+                    'down_payment' => '40%',
+                    'installment_years' => '1.5 years',
+                    'maintenance' => '5%',
+                    'notes' => null,
+                ],
+
+                'features' => [],
                 'images_count' => 10,
             ],
+
             [
                 'name_ar' => 'زون مول',
                 'name_en' => 'ZONE',
@@ -328,48 +442,73 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'دمياط الجديدة',
                 'location_en' => 'New Damietta',
+
                 'latitude' => '31.429516',
                 'longitude' => '31.649912',
+
                 'price_budget' => '1,393,150 - 6,300,000',
+
                 'status' => 'immediate',
                 'delivery_time' => 'immediate delivery',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'وحدات تجارية - أرضي',
+                        'name_en' => 'Commercial Units - Ground',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Ground',
-                        'start_area' => '30 - 36 - 37',
-                        'price_per_meter' => '170,000 to 175,000',
-                        'unit_price' => '5,100,000 to 6,300,000',
+
+                        'area' => 36,
+
+                        'price_per_meter' => 172500,
+                        'unit_price' => 6210000,
+
                         'finishing_type' => 'core and shell',
                     ],
+
                     [
+                        'name_ar' => 'وحدات تجارية - ميزانين',
+                        'name_en' => 'Commercial Units - Mezzanine',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Mezzanine',
-                        'start_area' => '16.39 - 20.24 - 28 - 43',
-                        'price_per_meter' => '85,000',
-                        'unit_price' => '1,393,150 to 2,416,550',
+
+                        'area' => 28,
+
+                        'price_per_meter' => 85000,
+                        'unit_price' => 2380000,
+
                         'finishing_type' => 'core and shell',
                     ],
+
                     [
+                        'name_ar' => 'وحدات إدارية',
+                        'name_en' => 'Administrative Units',
+
                         'unit_type' => 'Administrative',
                         'floor' => 'First - Second',
-                        'start_area' => '50.73 - 45.81',
-                        'price_per_meter' => '53,000 to 57,000',
-                        'unit_price' => '2,611,170 to 2,688,690',
+
+                        'area' => 50.73,
+
+                        'price_per_meter' => 55000,
+                        'unit_price' => 2790150,
+
                         'finishing_type' => 'semi finishing',
-                    ]
+                    ],
+
                 ],
 
                 'payment' => [
                     'down_payment' => '40%',
                     'installment_years' => '1.5 years',
                     'maintenance' => '5%',
-                    'notes' => null
+                    'notes' => null,
                 ],
 
                 'features' => [],
-                'images_count' => 8
+                'images_count' => 8,
             ],
 
             [
@@ -382,51 +521,74 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'دمياط الجديدة',
                 'location_en' => 'New Damietta',
+
                 'latitude' => '31.435250',
                 'longitude' => '31.653600',
+
                 'price_budget' => '1,343,000 - 6,965,000',
+
                 'status' => 'under_construction',
                 'delivery_time' => '1 year',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'وحدات تجارية - أرضي',
+                        'name_en' => 'Commercial Units - Ground',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Ground',
-                        'start_area' => '39.8 - 39.8',
-                        'price_per_meter' => '175,000',
-                        'unit_price' => '6,965,000',
+
+                        'area' => 39.8,
+
+                        'price_per_meter' => 175000,
+                        'unit_price' => 6965000,
+
                         'finishing_type' => 'core and shell',
                     ],
+
                     [
+                        'name_ar' => 'وحدات تجارية - ميزانين',
+                        'name_en' => 'Commercial Units - Mezzanine',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Mezzanine',
-                        'start_area' => '15.8 - 20.92 - 28.64',
-                        'price_per_meter' => '90,000',
-                        'unit_price' => '1,343,000 to 2,577,600',
+
+                        'area' => 28.64,
+
+                        'price_per_meter' => 90000,
+                        'unit_price' => 2577600,
+
                         'finishing_type' => 'core and shell',
                     ],
+
                     [
+                        'name_ar' => 'وحدات إدارية',
+                        'name_en' => 'Administrative Units',
+
                         'unit_type' => 'Administrative',
                         'floor' => 'First - Second',
-                        'start_area' => '41.78 - 44.73 - 81.57',
-                        'price_per_meter' => '46,000 - 55,000',
-                        'unit_price' => '1,921,880 to 4,486,150',
+
+                        'area' => 44.73,
+
+                        'price_per_meter' => 50000,
+                        'unit_price' => 2236500,
+
                         'finishing_type' => 'semi finishing',
-                    ]
+                    ],
+
                 ],
 
                 'payment' => [
                     'down_payment' => '40%',
                     'installment_years' => '1.5 years',
                     'maintenance' => '5%',
-                    'notes' => null
+                    'notes' => null,
                 ],
 
                 'features' => [],
-                'images_count' => 4
+                'images_count' => 4,
             ],
-
-          
 
             [
                 'name_ar' => 'جولدن سكوير',
@@ -438,146 +600,275 @@ class ProjectFullSeeder extends Seeder
 
                 'location_ar' => 'دمياط الجديدة',
                 'location_en' => 'New Damietta',
+
                 'latitude' => '31.428580',
                 'longitude' => '31.650350',
+
                 'price_budget' => '2,000,000 - 12,000,000',
+
                 'status' => 'under_construction',
                 'delivery_time' => '3 years',
 
                 'units' => [
+
                     [
+                        'name_ar' => 'وحدات سكنية',
+                        'name_en' => 'Residential Units',
+
                         'unit_type' => 'Residential',
                         'floor' => 'F/S/TH/FO',
-                        'start_area' => '112M - 145M',
-                        'price_per_meter' => '33,000 - 38,000',
-                        'unit_price' => '3,700,000 to 5,500,000',
+
+                        'area' => 145,
+
+                        'price_per_meter' => 35500,
+                        'unit_price' => 5147500,
+
                         'finishing_type' => 'semi finishing',
                     ],
+
                     [
+                        'name_ar' => 'وحدات تجارية',
+                        'name_en' => 'Commercial Units',
+
                         'unit_type' => 'Commercial',
                         'floor' => 'Ground',
-                        'start_area' => '18M - 60M',
-                        'price_per_meter' => '110,000 to 250,000',
-                        'unit_price' => '2,500,000 to 12,000,000',
+
+                        'area' => 40,
+
+                        'price_per_meter' => 180000,
+                        'unit_price' => 7200000,
+
                         'finishing_type' => 'core and shell',
                     ],
+
                     [
+                        'name_ar' => 'وحدات إدارية',
+                        'name_en' => 'Administrative Units',
+
                         'unit_type' => 'Administrative',
                         'floor' => 'F/S/TH',
-                        'start_area' => '40M - 50M',
-                        'price_per_meter' => '45,000 - 70,000',
-                        'unit_price' => '2,000,000 to 4,500,000',
+
+                        'area' => 45,
+
+                        'price_per_meter' => 57500,
+                        'unit_price' => 2587500,
+
                         'finishing_type' => 'core and shell',
-                    ]
+                    ],
+
                 ],
 
                 'payment' => [
                     'down_payment' => null,
                     'installment_years' => null,
                     'maintenance' => '8%',
-                    'notes' => 'SOON'
+                    'notes' => 'SOON',
                 ],
 
                 'features' => [],
-                'images_count' => 9
+                'images_count' => 9,
             ],
+
         ];
 
         /*
-        |-----------------------------------------
-        | INSERT
-        |-----------------------------------------
+        |--------------------------------------------------------------------------
+        | INSERT PROJECTS
+        |--------------------------------------------------------------------------
         */
 
         foreach ($projects as $data) {
 
-            $project = Project::updateOrCreate(
-                ['name_en' => $data['name_en']],
-                [
-                    'sector_id' => $sector($data['sector_slug'])?->id,
+            DB::transaction(function () use ($data, $sector) {
 
-                    'name_ar' => $data['name_ar'],
-                    'name_en' => $data['name_en'],
+                /*
+                |--------------------------------------------------------------------------
+                | PROJECT
+                |--------------------------------------------------------------------------
+                */
 
-                    'description_ar' => $data['description_ar'],
-                    'description_en' => $data['description_en'],
+                $folderName = Str::of($data['name_en'])
+                    ->lower()
+                    ->replace(' ', '_');
 
-                    'location_ar' => $data['location_ar'],
-                    'location_en' => $data['location_en'],
-                    'latitude' => $data['latitude'] ?? null,
-                    'longitude' => $data['longitude'] ?? null,
-                    'price_budget' => $data['price_budget'],
-                    'status' => $data['status'],
-                    'delivery_time' => $data['delivery_time'],
-
-                    'image' => Str::of($data['name_en'])
-                        ->lower()
-                        ->replace(' ', '_') . '/' . Str::of($data['name_en'])
-                        ->lower()
-                        ->replace(' ', '_') . '1.jpg',
-                    'hover_image' => Str::of($data['name_en'])
-                        ->lower()
-                        ->replace(' ', '_') . '/' . Str::of($data['name_en'])
-                        ->lower()
-                        ->replace(' ', '_') . '2.jpg',
-                ]
-            );
-
-            /*
-            | UNITS
-            */
-            foreach ($data['units'] as $unit) {
-                ProjectUnit::updateOrCreate(
+                $project = Project::updateOrCreate(
                     [
-                        'project_id' => $project->id,
-                        'unit_type' => $unit['unit_type'],
-                        'floor' => $unit['floor'],
-                    ],
-                    $unit
-                );
-            }
-
-            /*
-            | PAYMENT
-            */
-            if (!empty($data['payment'])) {
-                ProjectPaymentPlan::updateOrCreate(
-                    ['project_id' => $project->id],
-                    $data['payment']
-                );
-            }
-
-            /*
-            | FEATURES
-            */
-            foreach ($data['features'] as $feature) {
-                ProjectFeature::updateOrCreate(
-                    [
-                        'project_id' => $project->id,
-                        'title_en' => $feature['title_en'] ?? '',
-                    ],
-                    $feature
-                );
-            }
-            /*
-            | IMAGES
-            */
-            $folderName = Str::of($data['name_en'])
-                ->lower()
-                ->replace(' ', '_');
-
-            for ($i = 1; $i <= ($data['images_count'] ?? 0); $i++) {
-
-                ProjectImage::updateOrCreate(
-                    [
-                        'project_id' => $project->id,
-                        'image' => "{$folderName}/{$folderName}{$i}.jpg",
+                        'name_en' => $data['name_en'],
                     ],
                     [
-                        'image' => "{$folderName}/{$folderName}{$i}.jpg",
+                        'sector_id' => $sector($data['sector_slug'])?->id,
+
+                        'name_ar' => $data['name_ar'],
+                        'name_en' => $data['name_en'],
+
+                        'description_ar' => $data['description_ar'],
+                        'description_en' => $data['description_en'],
+
+                        'location_ar' => $data['location_ar'],
+                        'location_en' => $data['location_en'],
+
+                        'latitude' => $data['latitude'] ?? null,
+                        'longitude' => $data['longitude'] ?? null,
+
+                        'price_budget' => $data['price_budget'],
+
+                        'status' => $data['status'],
+                        'delivery_time' => $data['delivery_time'],
+
+                        'image' => "{$folderName}/optimized/{$folderName}1.webp",
+
+                        'hover_image' => "{$folderName}/optimized/{$folderName}2.webp",
                     ]
                 );
-            }
+
+                /*
+                |--------------------------------------------------------------------------
+                | UNIT TYPES + ACTUAL UNITS
+                |--------------------------------------------------------------------------
+                */
+
+                foreach ($data['units'] as $index => $unit) {
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Unique prefix for actual unit numbers
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $typePrefix = match ($unit['unit_type']) {
+                        'Residential' => 'RES',
+                        'Commercial' => 'COM',
+                        'Administrative' => 'ADM',
+                        'Hotel Units' => 'HOT',
+                        default => 'UNIT',
+                    };
+
+                    $floorPrefix = Str::upper(
+                        Str::of($unit['floor'])
+                            ->replace([' ', '/', '-'], '')
+                            ->substr(0, 5)
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | UNIT TYPE
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $unitType = ProjectUnitType::updateOrCreate(
+                        [
+                            'project_id' => $project->id,
+                            'unit_type' => $unit['unit_type'],
+                            'floor' => $unit['floor'],
+                        ],
+                        [
+                            'name_ar' => $unit['name_ar'],
+                            'name_en' => $unit['name_en'],
+
+                            'unit_type' => $unit['unit_type'],
+                            'floor' => $unit['floor'],
+
+                            'area' => $unit['area'],
+
+                            'price_per_meter' => $unit['price_per_meter'],
+                            'unit_price' => $unit['unit_price'],
+
+                            'finishing_type' => $unit['finishing_type'],
+
+                            'total_units' => 50,
+                        ]
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | CREATE 50 ACTUAL UNITS
+                    |--------------------------------------------------------------------------
+                    */
+
+                    for ($i = 1; $i <= 50; $i++) {
+
+                        $unitNumber = sprintf(
+                            '%s-%s-%03d',
+                            $typePrefix,
+                            $floorPrefix ?: 'GEN',
+                            $i
+                        );
+
+                        ProjectUnit::updateOrCreate(
+                            [
+                                'project_id' => $project->id,
+                                'unit_number' => $unitNumber,
+                            ],
+                            [
+                                'project_unit_type_id' => $unitType->id,
+
+                                'area' => $unit['area'],
+
+                                'price_per_meter' => $unit['price_per_meter'],
+
+                                'unit_price' => $unit['unit_price'],
+
+                                'status' => 'available',
+                            ]
+                        );
+                    }
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | PAYMENT PLAN
+                |--------------------------------------------------------------------------
+                */
+
+                if (!empty($data['payment'])) {
+
+                    ProjectPaymentPlan::updateOrCreate(
+                        [
+                            'project_id' => $project->id,
+                        ],
+                        $data['payment']
+                    );
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | FEATURES
+                |--------------------------------------------------------------------------
+                */
+
+                foreach ($data['features'] as $feature) {
+
+                    ProjectFeature::updateOrCreate(
+                        [
+                            'project_id' => $project->id,
+                            'title_en' => $feature['title_en'] ?? '',
+                        ],
+                        $feature
+                    );
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | IMAGES
+                |--------------------------------------------------------------------------
+                */
+
+                for ($i = 1; $i <= ($data['images_count'] ?? 0); $i++) {
+
+                    $imagePath =
+                        "{$folderName}/optimized/{$folderName}{$i}.webp";
+
+                    ProjectImage::updateOrCreate(
+                        [
+                            'project_id' => $project->id,
+                            'image' => $imagePath,
+                        ],
+                        [
+                            'image' => $imagePath,
+                        ]
+                    );
+                }
+            });
         }
     }
 }

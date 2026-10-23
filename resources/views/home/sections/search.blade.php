@@ -3,12 +3,15 @@
 <div id="search-overlay" class="search-overlay" aria-hidden="true" role="dialog" aria-modal="true"
     aria-labelledby="search-modal-title">
     <div class="search-modal-container">
+        <!-- شريط الإضاءة العلوي -->
         <div class="search-modal-glow"></div>
 
+        <!-- زر الإغلاق -->
         <button id="close-search-modal" class="close-search-btn" aria-label="Close Search">
             <i class="fa-solid fa-xmark"></i>
         </button>
 
+        <!-- رأس الموديل -->
         <div class="search-modal-header">
             <h2 id="search-modal-title" data-en="Find Your Dream Property" data-ar="ابحث عن عقار أحلامك">Find Your Dream
                 Property</h2>
@@ -17,10 +20,10 @@
                 sector, budget or area to find exactly what you need.</p>
         </div>
 
+        <!-- نموذج البحث والفلترة -->
         <form id="search-modal-form" action="{{ route('search.results') ?? '#' }}" method="GET"
             class="search-modal-form" onsubmit="event.preventDefault();">
-
-            <div class="search-form-group full-width">
+            <div class="search-form-group full-width animate-item" style="--delay: 0.1s">
                 <div class="input-with-icon">
                     <i class="fa-solid fa-magnifying-glass input-icon search-indicator-icon"></i>
                     <input type="text" name="keyword" class="search-input" id="search-keyword-input"
@@ -36,13 +39,14 @@
                 </div>
             </div>
 
-            <div class="search-filters-grid">
+            <div class="search-filters-grid animate-item" style="--delay: 0.2s">
+                <!-- القطاع -->
                 <div class="search-form-group">
                     <label data-en="Sector" data-ar="القطاع">Sector</label>
                     <div class="custom-select-wrapper">
                         <select name="sector_id" class="search-select" id="filter-sector">
                             <option value="">{{ __('All Sectors') }}</option>
-                            @foreach ($sectors as $sector)
+                            @foreach ($sectors ?? [] as $sector)
                                 <option value="{{ $sector->id }}">
                                     {{ app()->getLocale() == 'ar' ? $sector->name_ar : $sector->name_en }}
                                 </option>
@@ -51,18 +55,20 @@
                     </div>
                 </div>
 
+                <!-- نوع الوحدة -->
                 <div class="search-form-group">
                     <label data-en="Unit Type" data-ar="نوع الوحدة">Unit Type</label>
                     <div class="custom-select-wrapper">
                         <select name="unit_type" class="search-select" id="filter-unit-type">
                             <option value="">{{ __('All Types') }}</option>
-                            @foreach ($unitTypes as $type)
+                            @foreach ($unitTypes ?? [] as $type)
                                 <option value="{{ $type }}">{{ $type }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
 
+                <!-- الميزانية -->
                 <div class="search-form-group">
                     <label data-en="Budget Range" data-ar="الميزانية">Budget Range</label>
                     <div class="custom-select-wrapper">
@@ -78,6 +84,7 @@
                     </div>
                 </div>
 
+                <!-- المساحة -->
                 <div class="search-form-group">
                     <label data-en="Area (sqm)" data-ar="المساحة (متر مربع)">Area (sqm)</label>
                     <div class="custom-select-wrapper">
@@ -95,15 +102,19 @@
             </div>
         </form>
 
-        <div class="search-results-viewport" id="search-results-container">
+        <!-- مساحة عرض النتائج -->
+        <div class="search-results-viewport animate-item" style="--delay: 0.3s" id="search-results-container">
+            <!-- الحالة الافتراضية -->
             <div class="search-feedback-state active-state" id="initial-search-state">
-                <i class="fa-solid fa-hand-pointer feedback-icon"></i>
+                <div class="animated-icon-wrapper"><i
+                        class="fa-solid fa-hand-pointer feedback-icon float-animation"></i></div>
                 <h4 data-en="Start Typing to Discover" data-ar="ابدأ الكتابة للاكتشاف">Start Typing to Discover</h4>
                 <p data-en="Search across our ultra-luxury projects, developments, and global premium listings."
-                    data-ar="ابحث في جميع مشاريعنا الفاخرة، عقاراتنا، وإعلاناتنا المتميزة.">Search across our
+                    data-ar="ابحث في جميع مشاريعنا الفاخرة، وعقاراتنا، وإعلاناتنا المتميزة.">Search across our
                     ultra-luxury projects, developments, and global premium listings.</p>
             </div>
 
+            <!-- حالة التحميل (Skeleton) -->
             <div class="search-loading-skeleton" id="search-loading-skeleton" style="display: none;">
                 @for ($i = 1; $i <= 3; $i++)
                     <div class="skeleton-card">
@@ -118,11 +129,14 @@
                 @endfor
             </div>
 
+            <!-- قائمة النتائج -->
             <div class="search-results-list" id="search-results-list" role="listbox" aria-label="Search Results">
             </div>
 
+            <!-- حالة عدم وجود نتائج -->
             <div class="search-feedback-state" id="empty-search-state" style="display: none;">
-                <i class="fa-solid fa-magnifying-glass-minus feedback-icon"></i>
+                <div class="animated-icon-wrapper"><i
+                        class="fa-solid fa-magnifying-glass-minus feedback-icon pulse-animation"></i></div>
                 <h4 data-en="No matching properties found" data-ar="لم نجد نتائج مطابقة">No matching properties found
                 </h4>
                 <p data-en="Try expanding your budget, checking other sectors, or correcting your search keyword."
@@ -130,8 +144,10 @@
                     Try expanding your budget, checking other sectors, or correcting your search keyword.</p>
             </div>
 
+            <!-- حالة الخطأ بالاتصال -->
             <div class="search-feedback-state error-state" id="error-search-state" style="display: none;">
-                <i class="fa-solid fa-circle-exclamation feedback-icon"></i>
+                <div class="animated-icon-wrapper"><i
+                        class="fa-solid fa-triangle-exclamation feedback-icon shake-animation"></i></div>
                 <h4 data-en="Unable to connect to service" data-ar="فشل الاتصال بالخدمة">Unable to connect to service
                 </h4>
                 <p data-en="Please check your connection and try searching again."
@@ -143,7 +159,8 @@
             </div>
         </div>
 
-        <div class="search-modal-footer">
+        <!-- تذييل الموديل (الاختصارات) -->
+        <div class="search-modal-footer animate-item" style="--delay: 0.4s">
             <div class="shortcut-tags">
                 <span><kbd>↑↓</kbd> <span data-en="Navigate" data-ar="للتنقل">Navigate</span></span>
                 <span><kbd>Enter</kbd> <span data-en="Select" data-ar="للاختيار">Select</span></span>
@@ -153,4 +170,5 @@
         </div>
     </div>
 </div>
+
 @include('home.scripts.search')

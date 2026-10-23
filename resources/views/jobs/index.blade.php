@@ -1,4 +1,5 @@
 @extends('layouts.page')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 @section('title', app()->getLocale() == 'ar' ? 'الوظائف | البرلسي' : 'Jobs | Albrolosy')
 

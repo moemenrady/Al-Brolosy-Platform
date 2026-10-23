@@ -27,4 +27,9 @@ class Identity extends Model
     {
         return $this->hasOne(UserSetting::class);
     }
+
+    public function behaviors()
+    {
+        return $this->hasMany(UserBehavior::class);
+    }
 }

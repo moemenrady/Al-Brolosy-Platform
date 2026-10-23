@@ -56,14 +56,37 @@ class Project extends Model
   {
     return $this->hasMany(ProjectImage::class);
   }
+
   public function sector()
   {
     return $this->belongsTo(Sector::class);
   }
 
+  public function unitTypes()
+  {
+    return $this->hasMany(ProjectUnitType::class);
+  }
+
+  public function actualUnits()
+  {
+    return $this->hasMany(ProjectUnit::class);
+  }
+
   public function units()
   {
     return $this->hasMany(ProjectUnit::class);
+  }
+
+  public function getUnitsAttribute()
+  {
+    return $this->relationLoaded('unitTypes')
+      ? $this->getRelation('unitTypes')
+      : $this->unitTypes()->get();
+  }
+
+  public function paymentPlan()
+  {
+    return $this->hasOne(ProjectPaymentPlan::class);
   }
 
   public function paymentPlans()

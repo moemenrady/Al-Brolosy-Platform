@@ -51,7 +51,7 @@ class HomeController extends Controller
 
     $sectors = \App\Models\Sector::orderBy('sort_order', 'asc')->get();
 
-    $projects = \App\Models\Project::with(['units', 'paymentPlans', 'sector'])
+    $projects = \App\Models\Project::with(['unitTypes.units', 'paymentPlan', 'sector'])
       ->where('is_active', true)->orderBy('sort_order', 'asc')->get();
 
     $categories = \App\Models\MediaCategory::orderBy(app()->getLocale() == 'ar' ? 'name_ar' : 'name_en')->get();
@@ -63,7 +63,7 @@ class HomeController extends Controller
 
     $teamImages = \App\Models\TeamImage::query()->where('is_active', true)
       ->orderBy('sort_order')->get(['id', 'image_path', 'title_ar', 'title_en', 'type']);
-    $unitTypes = \App\Models\ProjectUnit::query()
+    $unitTypes = \App\Models\ProjectUnitType::query()
       ->select('unit_type')
       ->whereNotNull('unit_type')
       ->distinct()
@@ -74,7 +74,16 @@ class HomeController extends Controller
     $identity = request()->attributes->get('identity');
 
     $client = Client::where('identity_id', $identity->id)->with("histories")->first();
-
+    $focusedProject = \App\Models\Project::with([
+      'unitTypes.units',
+      'paymentPlan',
+      'sector',
+      'images',
+      'features',
+      'tags',
+    ])
+      ->where('is_active', true)
+      ->find(1);
 
     return view('home.index', compact(
       'offers',
@@ -87,7 +96,8 @@ class HomeController extends Controller
       'currentLang',
       'currentTheme',
       'unitTypes',
-      'client'
+      'client',
+      'focusedProject'
     ));
   }
 
@@ -99,7 +109,7 @@ class HomeController extends Controller
       ->orderBy('sort_order')
       ->get();
 
-    $unitTypes = \App\Models\ProjectUnit::query()
+    $unitTypes = \App\Models\ProjectUnitType::query()
       ->select('unit_type')
       ->distinct()
       ->pluck('unit_type');

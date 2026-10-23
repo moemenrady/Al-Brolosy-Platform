@@ -14,6 +14,53 @@ use Illuminate\Support\Facades\Auth;
 class ClientInterestController extends Controller
 {
 
+    public function lead_register(Request $request)
+    {
+        // Identity التي قام IdentifyUser بإنشائها/استرجاعها
+        $identity = $request->attributes->get('identity');
+
+        if (!$identity) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Identity not found.',
+            ], 401);
+        }
+
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+        ]);
+
+        // هل يوجد Client مرتبط بهذه الـ Identity؟
+        $client = Client::where('identity_id', $identity->id)->first();
+
+        if ($client) {
+            return response()->json([
+                'success' => true,
+                'exists' => true,
+                'client_id' => $client->id,
+                'message_ar' => 'بيانات العميل موجودة بالفعل.',
+                'message_en' => 'Client data already exists.',
+            ]);
+        }
+
+        // إنشاء العميل لأول مرة
+        $client = Client::create([
+            'identity_id' => $identity->id,
+            'full_name' => $validated['full_name'],
+            'phone' => $validated['phone'],
+            'lead_source' => 'website',
+            'lead_status' => 'new',
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'exists' => false,
+            'client_id' => $client->id,
+            'message_ar' => 'ممتاز! أكمل تفضيلاتك العقارية في ثوانٍ لنرشح لك الأنسب',
+            'message_en' => 'Excellent! Complete your preferences in seconds so we can recommend the best.',
+        ], 201);
+    }
     public function index(Request $request)
     {
         // بناء الاستعلام مع العلاقات لتحسين الأداء وتجنب N+1 Problem

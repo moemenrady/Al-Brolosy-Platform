@@ -135,6 +135,11 @@ class Client extends Model
         return $this->hasMany(ClientHistory::class)->latest();
     }
 
+    public function behaviors()
+    {
+        return $this->hasMany(UserBehavior::class)->latest();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Scopes

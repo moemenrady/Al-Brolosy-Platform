@@ -72,7 +72,7 @@
             @foreach ($projects as $project)
                 @php
                     // استخراج الأرقام فقط للفلترة الذكية
-                    $unitPrices = $project->units
+                    $unitPrices = $project->unitTypes
                         ->pluck('unit_price')
                         ->map(function ($p) {
                             return (float) preg_replace('/[^0-9.]/', '', $p);
@@ -82,7 +82,7 @@
                         $unitPrices->min() ?: ((float) preg_replace('/[^0-9.]/', '', $project->price_budget) ?: 0);
                     $maxPrice = $unitPrices->max() ?: $minPrice;
 
-                    $unitAreas = $project->units
+                    $unitAreas = $project->unitTypes
                         ->pluck('start_area')
                         ->map(function ($a) {
                             return (float) preg_replace('/[^0-9.]/', '', $a);
@@ -100,22 +100,15 @@
                     data-date="{{ $timestamp }}">
 
                     <a href="{{ route('projects.show', $project->id) }}" class="project-card-link-wrapper">
-
                         <div class="project-card-media">
                             <img src="{{ asset('images/projects/' . $project->image) }}" alt="{{ $project->name_en }}"
                                 loading="lazy" class="base-project-img">
-                            @if ($project->hover_image)
-                                <img src="{{ asset('images/projects/' . $project->hover_image) }}"
-                                    alt="{{ $project->name_en }}" loading="lazy" class="hover-project-img">
-                            @endif
-
                             <div class="project-status-badge {{ $project->status }}">
                                 <span data-en="{{ ucfirst(str_replace('_', ' ', $project->status)) }}"
                                     data-ar="{{ $project->status == 'launched' ? 'تم الإطلاق' : ($project->status == 'coming_soon' ? 'قريباً' : ($project->status == 'under_construction' ? 'تحت الإنشاء' : 'تسليم فوري')) }}">
                                     {{ $project->status == 'launched' ? 'تم الإطلاق' : 'قريباً' }}
                                 </span>
                             </div>
-
                             <div class="hover-cta-message">
                                 <div class="hover-cta-icon">
                                     <svg viewBox="0 0 24 24">
@@ -128,7 +121,6 @@
                                     data-ar="الأسعار، المساحات، والموقع">الأسعار، المساحات، والموقع</div>
                             </div>
                         </div>
-
                         <div class="project-card-info">
                             <div class="project-meta-top">
                                 @if ($project->logo)
@@ -142,12 +134,10 @@
                                     </span>
                                 @endif
                             </div>
-
                             <h3 class="project-title-name" data-en="{{ $project->name_en }}"
                                 data-ar="{{ $project->name_ar }}">
                                 {{ app()->getLocale() == 'ar' ? $project->name_ar : $project->name_en }}
                             </h3>
-
                             @if ($project->latitude && $project->longitude)
                                 <object>
                                     <a href="https://www.google.com/maps/search/?api=1&query={{ $project->latitude }},{{ $project->longitude }}"
@@ -189,13 +179,13 @@
                                 ];
                             @endphp
 
-                            @if ($project->units->count() > 0)
+                            @if ($project->unitTypes->count() > 0)
                                 <div class="units-showcase-title" data-en="Available Units"
                                     data-ar="الوحدات المتاحة">
                                     {{ app()->getLocale() == 'ar' ? 'الوحدات المتاحة' : 'Available Units' }}
                                 </div>
                                 <div class="units-grid">
-                                    @foreach ($project->units->take(3) as $unit)
+                                    @foreach ($project->unitTypes->take(3) as $unit)
                                         @php
                                             $unitPrice = $unit->unit_price;
 

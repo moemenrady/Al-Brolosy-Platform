@@ -1,0 +1,565 @@
+migrations      Schema::create('projects', function (Blueprint $table) {
+
+      $table->id();
+
+      $table->foreignId('sector_id')
+        ->constrained()
+        ->cascadeOnDelete();
+
+      // =========================
+      // BASIC INFO
+      // =========================
+      $table->string('name_ar');
+      $table->string('name_en');
+
+      $table->string('logo')->nullable();
+
+      $table->string('copyright_sentence_ar')->nullable();
+      $table->string('copyright_sentence_en')->nullable();
+
+      $table->text('description_ar')->nullable();
+      $table->text('description_en')->nullable();
+
+      $table->string('location_ar')->nullable();
+      $table->string('location_en')->nullable();
+
+      // =========================
+      // LOCATION
+      // =========================
+      $table->decimal('latitude', 10, 7)->nullable();
+      $table->decimal('longitude', 10, 7)->nullable();
+
+      // =========================
+      // MEDIA
+      // =========================
+      $table->string('image');
+      $table->string('hover_image')->nullable();
+
+      // =========================
+      // PRICING
+      // =========================
+      $table->string('price_budget')->nullable();
+
+      // =========================
+      // STATUS
+      // =========================
+      $table->enum('status', [
+        'launched',
+        'coming_soon',
+        'under_construction',
+        'immediate'
+      ])->default('coming_soon');
+
+      // =========================
+      // CONTROL
+      // =========================
+      $table->integer('sort_order')->default(0);
+      $table->boolean('featured')->default(false);
+      $table->boolean('is_active')->default(true);
+
+      $table->string('delivery_time')->nullable();
+
+      $table->timestamps();
+    });    Schema::create('project_unit_types', function (Blueprint $table) {
+      $table->id();
+      $table->foreignId('project_id')
+        ->constrained()
+        ->cascadeOnDelete();
+      $table->string('name_ar')->nullable();
+      $table->string('name_en')->nullable();
+      $table->string('unit_type'); // residential / commercial / administrative
+      $table->string('floor')->nullable();
+      $table->decimal('area', 10, 2)->nullable();
+      $table->decimal('price_per_meter', 15, 2)->nullable();
+      $table->decimal('unit_price', 15, 2)->nullable();
+      $table->string('finishing_type')->nullable();
+      $table->unsignedInteger('total_units')->default(0);
+      $table->timestamps();
+    });   Schema::create('project_units', function (Blueprint $table) {
+    $table->id();
+
+    $table->foreignId('project_id')
+        ->constrained()
+        ->cascadeOnDelete();
+
+    $table->foreignId('project_unit_type_id')
+        ->constrained()
+        ->cascadeOnDelete();
+
+    $table->string('unit_number');
+
+    $table->decimal('area', 10, 2)->nullable();
+
+    $table->decimal('price_per_meter', 15, 2)->nullable();
+
+    $table->decimal('unit_price', 15, 2)->nullable();
+
+    $table->enum('status', [
+        'available',
+        'reserved',
+        'sold',
+    ])->default('available');
+
+    $table->timestamps();
+
+    $table->unique([
+        'project_id',
+        'unit_number'
+    ]);
+});  Schema::create('project_images', function (Blueprint $table) {
+      $table->id();
+      $table->string('image');
+      $table->unsignedBigInteger('project_id')->nullable();
+      $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+      $table->timestamps();
+    }); Schema::create('project_payment_plans', function (Blueprint $table) {
+      $table->id();
+      $table->foreignId('project_id')
+        ->constrained()
+        ->cascadeOnDelete();
+
+      // =========================
+      // PAYMENT DATA
+      // =========================
+      $table->string('down_payment')->nullable(); // 10% / 20%
+      $table->string('installment_years')->nullable(); // 3 years etc
+      $table->string('maintenance')->nullable(); // 5% / 8%
+      $table->text('notes')->nullable();
+      $table->timestamps();
+    });   Schema::create('project_features', function (Blueprint $table) {
+      $table->id();
+      $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+      $table->string('title_ar');
+      $table->string('title_en');
+      $table->string('value')->nullable();
+      $table->timestamps();
+    });     Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
+            $table->longText('description')->nullable();
+            $table->timestamps();
+        });    Schema::create('post_contents', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('post_id')->constrained()->cascadeOnDelete();
+            $table->enum('type', [
+                'text',
+                'image',
+                'video'
+            ]);
+            $table->longText('content');
+            $table->integer('sort_order')->default(0);
+            $table->timestamps();
+        });   Schema::create('project_unit_reservations', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('project_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignId('project_unit_id')
+                ->constrained('project_units')
+                ->cascadeOnDelete();
+
+            $table->string('customer_name');
+
+            $table->string('phone');
+
+            $table->text('notes')->nullable();
+
+            $table->enum('status', [
+                'pending',
+                'confirmed',
+                'cancelled',
+                'expired',
+            ])->default('pending');
+
+            $table->timestamp('reserved_until')->nullable();
+
+            $table->timestamps();
+        }); models  <?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Project extends Model
+{
+  protected $fillable = [
+    'sector_id',
+
+    'name_ar',
+    'name_en',
+
+    'logo',
+
+    'copyright_sentence_ar',
+    'copyright_sentence_en',
+
+    'description_ar',
+    'description_en',
+
+    'location_ar',
+    'location_en',
+
+    'latitude',
+    'longitude',
+
+    'image',
+    'hover_image',
+
+    'price_budget',
+
+    'status',
+    'sort_order',
+    'featured',
+    'is_active',
+
+    'delivery_time',
+  ];
+
+  protected $casts = [
+    'latitude' => 'float',
+    'longitude' => 'float',
+    'featured' => 'boolean',
+    'is_active' => 'boolean',
+  ];
+
+  /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+  public function images()
+  {
+    return $this->hasMany(ProjectImage::class);
+  }
+
+  public function sector()
+  {
+    return $this->belongsTo(Sector::class);
+  }
+
+  public function unitTypes()
+  {
+    return $this->hasMany(ProjectUnitType::class);
+  }
+
+  public function actualUnits()
+  {
+    return $this->hasMany(ProjectUnit::class);
+  }
+
+  public function units()
+  {
+    return $this->hasMany(ProjectUnit::class);
+  }
+
+  public function getUnitsAttribute()
+  {
+    return $this->relationLoaded('unitTypes')
+      ? $this->getRelation('unitTypes')
+      : $this->unitTypes()->get();
+  }
+
+  public function paymentPlan()
+  {
+    return $this->hasOne(ProjectPaymentPlan::class);
+  }
+
+  public function paymentPlans()
+  {
+    return $this->hasMany(ProjectPaymentPlan::class);
+  }
+
+  public function features()
+  {
+    return $this->hasMany(ProjectFeature::class);
+  }
+  public function tags()
+  {
+    return $this->belongsToMany(Tag::class);
+  }
+
+  public function posts()
+  {
+    return $this->hasMany(Post::class);
+  }
+
+  /*
+    |--------------------------------------------------------------------------
+    | ACCESSORS (MULTI LANGUAGE)
+    |--------------------------------------------------------------------------
+    */
+
+  public function getNameAttribute()
+  {
+    return app()->getLocale() == 'ar'
+      ? $this->name_ar
+      : $this->name_en;
+  }
+
+  public function getDescriptionAttribute()
+  {
+    return app()->getLocale() == 'ar'
+      ? $this->description_ar
+      : $this->description_en;
+  }
+
+  public function getLocationAttribute()
+  {
+    return app()->getLocale() == 'ar'
+      ? $this->location_ar
+      : $this->location_en;
+  }
+
+  public function getCopyrightSentenceAttribute()
+  {
+    return app()->getLocale() == 'ar'
+      ? $this->copyright_sentence_ar
+      : $this->copyright_sentence_en;
+  }
+}
+  <?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProjectFeature extends Model
+{
+    protected $fillable = [
+        'project_id',
+        'title_ar',
+        'title_en',
+        'value',
+    ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+}
+ <?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProjectImage extends Model
+{
+  protected $fillable = [
+    'project_id',
+    'image',
+  ];
+
+  public function project()
+  {
+    return $this->belongsTo(Project::class);
+  }
+}
+  <?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProjectPaymentPlan extends Model
+{
+    protected $fillable = [
+        'project_id',
+        'down_payment',
+        'installment_years',
+        'maintenance',
+        'notes',
+    ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+}
+  <?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProjectTag extends Model
+{
+    //
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class ProjectUnitReservation extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'project_id',
+        'project_unit_id',
+        'customer_name',
+        'phone',
+        'notes',
+        'status',
+        'reserved_until',
+    ];
+
+    protected $casts = [
+        'reserved_until' => 'datetime',
+    ];
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+  
+    public function projectUnit(): BelongsTo
+    {
+        return $this->belongsTo(ProjectUnit::class);
+    }
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model; 
+class ProjectUnit extends Model
+{
+    protected $fillable = [
+        'project_id',
+        'project_unit_type_id',
+        'unit_number',
+        'area',
+        'price_per_meter',
+        'unit_price',
+        'status',
+    ];
+
+    protected $casts = [
+        'area' => 'decimal:2',
+        'price_per_meter' => 'decimal:2',
+        'unit_price' => 'decimal:2',
+    ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function unitType()
+    {
+        return $this->belongsTo(ProjectUnitType::class, 'project_unit_type_id');
+    }
+
+    public function getUnitTypeAttribute()
+    {
+        return $this->unitType?->unit_type;
+    }
+
+    public function getFloorAttribute()
+    {
+        return $this->unitType?->floor;
+    }
+
+    public function getStartAreaAttribute()
+    {
+        return $this->unitType?->area ?? $this->area;
+    }
+
+    public function getPricePerMeterAttribute()
+    {
+        return $this->unitType?->price_per_meter ?? $this->attributes['price_per_meter'] ?? null;
+    }
+
+    public function getUnitPriceAttribute()
+    {
+        return $this->unitType?->unit_price ?? $this->attributes['unit_price'] ?? null;
+    }
+
+    public function getFinishingTypeAttribute()
+    {
+        return $this->unitType?->finishing_type;
+    }
+}<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProjectPaymentPlan extends Model
+{
+    protected $fillable = [
+        'project_id',
+        'down_payment',
+        'installment_years',
+        'maintenance',
+        'notes',
+    ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProjectUnitType extends Model
+{
+    protected $fillable = [
+        'project_id',
+        'name_ar',
+        'name_en',
+        'unit_type',
+        'floor',
+        'area',
+        'price_per_meter',
+        'unit_price',
+        'finishing_type',
+        'total_units',
+    ];
+
+    protected $casts = [
+        'area' => 'decimal:2',
+        'price_per_meter' => 'decimal:2',
+        'unit_price' => 'decimal:2',
+        'total_units' => 'integer',
+    ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function units()
+    {
+        return $this->hasMany(ProjectUnit::class);
+    }
+
+    public function getStartAreaAttribute()
+    {
+        return $this->area;
+    }
+
+    public function getAreaFromAttribute()
+    {
+        return $this->area;
+    }
+
+    public function getAreaToAttribute()
+    {
+        return $this->area;
+    }
+}

@@ -1,110 +1,87 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // ==========================================
-        // 1. إدارة التحميل (Loader) والفيديو
-        // ==========================================
-        const loader = document.getElementById("premium-loader");
-        const logo = document.getElementById("loader-logo");
-        const videoDesktop = document.getElementById("hero-video-desktop");
-        const videoMobile = document.getElementById("hero-video-mobile");
-        const heroContent = document.getElementById("hero-content");
+        // =========================================================
+        // إدارة تحميل الفيديو الخاص بـ Hero 2 ديناميكياً بدون تحميل أزواج إضافية
+        // =========================================================
+        const videoDesktop2 = document.getElementById("d_hero2-video");
+        const videoMobile2 = document.getElementById("m_hero2-video");
 
-        const isMobile = window.innerWidth < 768;
-        const activeVideo = isMobile ? videoMobile : videoDesktop;
+        if (!videoDesktop2 || !videoMobile2) return;
 
-        // بدء حركة اللوجو
-        setTimeout(() => {
-            logo.classList.add("spin-90");
-        }, 50);
+        const MOBILE_BREAKPOINT = 768;
+        let currentHero2Mode = null; // 'mobile' | 'desktop'
 
-        const checkVideoReady = new Promise((resolve) => {
-            if (activeVideo.readyState >= 3) {
-                resolve();
+        function getHero2Mode() {
+            return window.innerWidth < MOBILE_BREAKPOINT ? "mobile" : "desktop";
+        }
+
+        function activateHero2Video(mode) {
+            const active = mode === "mobile" ? videoMobile2 : videoDesktop2;
+            const inactive = mode === "mobile" ? videoDesktop2 : videoMobile2;
+
+            // إيقاف الفيديو غير المستخدم وسحب الـ src منه لمنع الاستهلاك
+            inactive.pause();
+            inactive.removeAttribute("src");
+            inactive.querySelectorAll("source").forEach(s => s.removeAttribute("src"));
+            inactive.load();
+            inactive.classList.add("video-inactive");
+            inactive.classList.remove("video-ready");
+
+            // تعيين الـ src للفيديو النشط فقط إذا لم يكن قد تم تحميله بالفعل
+            if (!active.dataset.loaded) {
+                active.src = active.dataset.src;
+                active.dataset.loaded = "true";
+            }
+            active.classList.remove("video-inactive");
+            return active;
+        }
+
+        function setupHero2Video(video) {
+            if (!video) return;
+            video.load();
+
+            const playPromise = () => {
+                video.classList.add("video-ready");
+                video.play().catch(e => console.log("Hero2 Autoplay prevented:", e));
+            };
+
+            if (video.readyState >= 3) {
+                playPromise();
             } else {
-                activeVideo.addEventListener("canplaythrough", resolve, {
+                video.addEventListener("canplaythrough", playPromise, {
                     once: true
                 });
-                // Fallback timeout in case video fails to load quickly
-                setTimeout(resolve, 3000);
+                // Fallback للأمان في حالة تأخر الشبكة
+                setTimeout(playPromise, 3000);
             }
-        });
+        }
 
-        setTimeout(() => {
-            checkVideoReady.then(() => {
-                logo.classList.remove("spin-90");
-                logo.classList.add("spin-360");
+        // التشغيل الأولي عند تحضير الصفحة
+        currentHero2Mode = getHero2Mode();
+        const activeHero2Video = activateHero2Video(currentHero2Mode);
+        setupHero2Video(activeHero2Video);
 
-                setTimeout(() => {
-                    loader.style.opacity = "0";
-                    setTimeout(() => {
-                        loader.style.visibility = "hidden";
-                        activeVideo.classList.add("video-ready");
-                        activeVideo.play().catch(e => console.log(
-                            "Autoplay prevented:", e));
-                        heroContent.classList.add("content-visible");
-                    }, 800);
-                }, 1000);
-            });
-        }, 1050);
+        // =========================================================
+        // التبديل عند إمالة الشاشة أو تغيير مقاس النافذة (Resize Debounce)
+        // =========================================================
+        let resizeTimer2 = null;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer2);
+            resizeTimer2 = setTimeout(() => {
+                const newMode = getHero2Mode();
+                if (newMode === currentHero2Mode) return;
 
-        // ==========================================
-        // 2. Smooth Scrolling والتمرير السلس
-        // ==========================================
-        document.querySelectorAll('.nav-link, .drawer-link, .btn-consultation, .drawer-btn').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const targetElement = document.getElementById(href.substring(1));
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                    // إغلاق الدراور إذا كان مفتوحاً
-                    if (drawer.classList.contains('open')) {
-                        toggleDrawer();
-                    }
+                currentHero2Mode = newMode;
+                const newActiveVideo = activateHero2Video(currentHero2Mode);
+
+                if (newActiveVideo.dataset.loaded === "true" && newActiveVideo.readyState >=
+                    3) {
+                    newActiveVideo.classList.add("video-ready");
+                    newActiveVideo.play().catch(() => {});
+                } else {
+                    setupHero2Video(newActiveVideo);
                 }
-            });
+            }, 300);
         });
-
-        // ==========================================
-        // 3. Mobile Drawer Logic (هيكل القائمة الجانبية)
-        // ==========================================
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const closeBtn = document.getElementById('close-drawer');
-        const drawer = document.getElementById('mobile-drawer');
-        const overlay = document.getElementById('drawer-overlay');
-
-        function openDrawer() {
-            drawer.classList.add('open');
-            overlay.classList.add('active');
-            menuBtn.classList.add('active');
-
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeDrawer() {
-            drawer.classList.remove('open');
-            overlay.classList.remove('active');
-            menuBtn.classList.remove('active');
-
-            document.body.style.overflow = '';
-        }
-
-        menuBtn?.addEventListener('click', openDrawer);
-        closeBtn?.addEventListener('click', closeDrawer);
-        overlay?.addEventListener('click', closeDrawer);
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024) {
-                closeDrawer();
-            }
-        });
-
-
     });
 </script>
-
-

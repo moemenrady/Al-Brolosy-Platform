@@ -6,7 +6,7 @@ use App\DTO\SearchResult;
 use App\Models\Project;
 use App\Models\ProjectFeature;
 use App\Models\ProjectPaymentPlan;
-use App\Models\ProjectUnit;
+use App\Models\ProjectUnitType;
 use App\Models\Tag;
 use Illuminate\Support\Arr;
 
@@ -64,11 +64,11 @@ final class ProjectSearcher implements SearcherInterface
                 $scores[$id] = max($scores[$id] ?? 0, 75);
             }
 
-            // Units (85)
-            $unitProjIds = ProjectUnit::where('unit_type', 'like', $kw)
+            // Unit Types (85)
+            $unitTypeProjIds = ProjectUnitType::where('unit_type', 'like', $kw)
                 ->orWhere('finishing_type', 'like', $kw)
                 ->pluck('project_id')->all();
-            foreach ($unitProjIds as $id) {
+            foreach ($unitTypeProjIds as $id) {
                 $scores[$id] = max($scores[$id] ?? 0, 85);
             }
 

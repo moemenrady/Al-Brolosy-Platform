@@ -6,13 +6,20 @@ use App\Models\Collection;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\SmartCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+    public function smartCards()
+    {
+        $cards = SmartCard::all();
 
-    public function dashboard() {
+        return view('admin.smart-cards.index', compact('cards'));
+    }
+    public function dashboard()
+    {
         return view('admin.dashboard');
     }
 
