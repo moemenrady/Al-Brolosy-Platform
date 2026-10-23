@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 // routes/admin
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('admin.dashboard');
+    });
 
     // لوحة القيادة المركزية للمنصة
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
